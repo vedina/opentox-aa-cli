@@ -5,7 +5,16 @@
   <name>OpenTox AA</name>
   <version>1.0.0-SNAPSHOT</version>
   <description>OpenTox Authorization and Authentication client library</description>
-   <build>
+  <scm>
+  	<connection>scm:git:https://vedina@github.com/vedina/opentox-aa-cli.git</connection>
+  	<developerConnection>scm:git:git@github.com:vedina/opentox-aa-cli.git</developerConnection>
+  	<url>scm:git:git@github.com:vedina/opentox-aa-cli.git</url>
+  </scm>
+  <organization>
+  	<name>Ideaconsult </name>
+  	<url>http://www.ideaconsult.net</url>
+  </organization>
+  <build>
    <plugins>
    	<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -200,10 +209,10 @@
   </mailingLists>
     <licenses>
   <license>
-    <name>LGPL</name>
-    <url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</url>
+    <name>LGPL3</name>
+    <url>http://www.gnu.org/licenses/lgpl.txt</url>
     <distribution>repo</distribution>
-    <comments>LGPL 2</comments>
+    <comments></comments>
   </license>
 </licenses>
     <dependencies>
@@ -229,18 +238,19 @@
     </dependencies>
      <inceptionYear>2010</inceptionYear>
   <issueManagement>
-  	<url>http://sourceforge.net/tracker/?group_id=191756</url>
+  	<system>GitHub</system>
+  	<url>https://github.com/vedina/opentox-aa-cli/issues</url>
   </issueManagement>
   <developers>
   	<developer>
   		<id>vedina</id>
   		<name>Nina Jeliazkova</name>
   		<email>jeliazkova.nina@gmail.com</email>
+  		<url>https://github.com/vedina</url>
+  		<timezone>CEST</timezone>
   		<roles>
   			<role>System Architecture</role>
   			<role>Java Developer</role>  		
-  			<role>Cheminformatics algorithms</role>  	
-  			<role>Database developer</role>  	  			
   		</roles>
   	</developer>
   </developers>
