@@ -1,7 +1,10 @@
 package org.opentox.aa.opensso;
 
 import java.io.Console;
+import java.io.File;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -25,6 +28,9 @@ public class aacli {
 	protected IOpenToxUser user;
 	protected String uri;
 	protected policy_command command = policy_command.authorize;
+	protected String backupDir = System.getProperty("java.io.tmpdir");
+	private final static Logger LOGGER = Logger.getLogger(aacli.class .getName());
+	
 	
 	enum policy_command {
 		authorize,
@@ -40,6 +46,7 @@ public class aacli {
 		user = new OpenToxUser();
 		user.setUserName(AAServicesConfig.getSingleton().getConfig(CONFIG.user));
 		user.setPassword(AAServicesConfig.getSingleton().getConfig(CONFIG.pass));
+		LOGGER.setLevel(Level.OFF);
 	}
 	
 	public void login() throws Exception {
@@ -101,6 +108,7 @@ public class aacli {
 				}
 			} else {
 				log(command,"Retrieving all policies for the current user");
+				handler.handleOwner(user.getUsername());
 				policy.listPolicies(ssotoken,handler);
 			}			
 		}
@@ -205,7 +213,29 @@ public class aacli {
 			return 0;
 		} 
 		case archive: {
-			IPolicyHandler handler = new PolicyArchiveHandler(policy);
+
+			File dir = new File(backupDir);
+			if (!dir.exists()) try {
+				dir.mkdir();
+			} catch (Exception x) {
+				throw new Exception(String.format("Can't create backup directory %s", dir.getAbsoluteFile()),x);
+			}
+			log(command,String.format("Using backup directory %s",dir.getAbsoluteFile()));
+			IPolicyHandler handler = new PolicyArchiveHandler(policy,dir) {
+				@Override
+				public void handlePolicy(String policyID) throws Exception {
+					super.handlePolicy(policyID);
+					long now = System.currentTimeMillis();
+					try {
+						policy.listPolicy(ssotoken, policyID, this);
+						now = System.currentTimeMillis() - now;
+						log(command,String.format("Policy '%s' retrieved and written in [%s ms]",policyID,now));
+					} catch (Exception x) {
+						log(command,String.format("ERROR retrieving policy %s",policyID));
+					}
+				}
+			};
+			
 			listPolicies(policy, handler);
 			break;
 		}
@@ -267,10 +297,15 @@ public class aacli {
 			this.command = policy_command.valueOf(argument);
 			break;
 		}			
+		case backupdir: {
+			this.backupDir = argument==null?option.getDefaultValue():argument;
+			break;
+		}
 		default: 
 		}
 	}
 	public static void main(String[] args) {
+
     	Options options = createOptions();
     	
     	aacli cli = new aacli();
@@ -458,6 +493,24 @@ public class aacli {
 				return policy_command.authorize.name();
 			}
 		},			
+		backupdir {
+			@Override
+			public String getArgName() {
+				return "Directory";
+			}
+			@Override
+			public String getDescription() {
+				return "Directory to archive policy XML files";
+			}
+			@Override
+			public String getShortName() {
+				return "b";
+			}
+			@Override
+			public String getDefaultValue() {
+				return System.getProperty("java.io.tmpdir");
+			}			
+		},
 		help {
 			@Override
 			public String getArgName() {
@@ -514,6 +567,22 @@ public class aacli {
 		"\t-c list";
 
 	}	
+	
+	
+	protected static String exampleArchivePolicies() {
+		return
+		"Retriewe and store locally XML files for the user:\n"+
+		"\tjava -jar aacli\n"+
+		"\t-n http://opensso.in-silico.ch/opensso/identity\n"+
+		"\t-z http://opensso.in-silico.ch/Pol/opensso-pol\n"+
+		"\t-u guest\n"+
+		"\t-p guest\n"+
+		"\t-b /tmp\n"+
+		"\t-c archive";
+		
+
+	}	
+	
 	
 	protected static String exampleRetrievePolicyContent() {
 		return
@@ -580,9 +649,11 @@ public class aacli {
 	    System.out.println(exampleAuth());
 	    System.out.println(exampleRetrievePoliciesPerURI());
 	    System.out.println(exampleRetrievePolicyContent());
+	    System.out.println(exampleArchivePolicies());
 	    System.out.println(exampleDeletePolicy());
 	    System.out.println(exampleDeletePolicyURI());
 	    System.out.println(exampleDeletePolicyUser());
+
 	    Runtime.getRuntime().runFinalization();						 
 		Runtime.getRuntime().exit(0);	
 	}
