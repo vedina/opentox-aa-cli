@@ -69,7 +69,7 @@ public class OpenToxPolicyTest {
 				Assert.assertTrue(token.authorize(uri, "POST"));
 			} catch (Exception x) {}
 			//clean up
-			policy.deletePolicy(token, policyID);
+			//policy.deletePolicy(token, policyID);
 		} catch (Exception x) {
 			throw x;
 		} finally {
@@ -224,7 +224,7 @@ public class OpenToxPolicyTest {
 			OpenSSOPolicy policy = new OpenSSOPolicy(config.getPolicyService());
 			Hashtable<String,String> policies = new Hashtable<String, String>();
 
-			String policyId = "guest__d282c424-f4b2-44c7-a914-35e3930a2d54";
+			String policyId = "group_9a4ab38c-0dda-47e2-9ffe-f700d0047780";
 			if (Status.SUCCESS_OK.getCode() == policy.listPolicy(token,policyId,policies)) {
 				System.out.println(policies.get(policyId));
 				Assert.assertNotNull(policies.get(policyId));
@@ -249,7 +249,7 @@ public class OpenToxPolicyTest {
 		
 			OpenSSOPolicy policy = new OpenSSOPolicy(config.getPolicyService());
 			
-			String uri = "http://blabla.uni-plovdiv.bg:8080/ambit2";
+			String uri = "http://blabla.uni-plovdiv.bg:8080/ambit2/dataset/1001";
 			//"https://ambit.uni-plovdiv.bg:8443/ambit2/dataset/63634";
 			
 			IOpenToxUser user = new OpenToxUser();
