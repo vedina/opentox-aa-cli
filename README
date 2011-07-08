@@ -1,1 +1,35 @@
-OpenTox AA client library
+A library and a command line client to facilitate access to the OpenTox authorization and authentication services.
+
+http://opentox.org/dev/apis/api-1.2/AA
+
+Build:
+>mvn clean package
+
+
+Use:
+1) As maven dependency
+
+2) As a command line utility
+
+This is a maven project. The following maven profile might be configured for build to succeed.
+
+
+<!-- Start config -->
+  <profiles>
+   <profile>
+      <id>opentox-opensso</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+         <!-- Configuration of OpenTox authentication service -->
+	    <aa.opensso>http://opensso.in-silico.ch/opensso/identity</aa.opensso>
+		<!-- Configuration of OpenTox authorization service -->
+        <aa.policy>http://opensso.in-silico.ch/Pol/opensso-pol</aa.policy>
+		<!-- User credentials for junit tests -->
+        <aa.user>YOUR-USER-FOR-TESTING</aa.user>
+        <aa.pass>YOUR-PASS-FOR-TESTING</aa.pass>
+      </properties>
+    </profile>
+  </profiles>
+<!-- End config -->
