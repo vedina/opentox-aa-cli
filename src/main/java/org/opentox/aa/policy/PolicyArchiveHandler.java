@@ -16,6 +16,7 @@ public class PolicyArchiveHandler extends PolicyHandler {
 	protected String filePrefix = "policy_";
 	protected File identifiers;
 	protected FileWriter idwriter;
+	protected FileWriter writerlog;
 	
 	public PolicyArchiveHandler(OpenSSOPolicy policy, File backupDir) throws IOException {
 		super();
@@ -26,6 +27,7 @@ public class PolicyArchiveHandler extends PolicyHandler {
 		identifiers = new File(backupDir,"policyids.txt");
 		if (identifiers.exists()) identifiers.delete();
 		idwriter = new FileWriter(identifiers);
+		writerlog = null;
 		
 	}
 	
@@ -50,6 +52,10 @@ public class PolicyArchiveHandler extends PolicyHandler {
 		} finally {
 			try { w.flush();w.close();} catch (Exception x) {}
 		}
+		if (writerlog ==null) {
+			writerlog = new FileWriter(new File(backupDir,"archived.txt"));
+			 writerlog.write("Policy id\tStatus\tFile\tTimestamp\n");
+		}
 		processed = 0;
 		FileReader idreader = new FileReader(identifiers);
 		try {
@@ -67,11 +73,14 @@ public class PolicyArchiveHandler extends PolicyHandler {
 				} catch (Exception x) {
 					log("archive",String.format("ERROR retrieving policy %s",policyID));
 				}
+				if ((getProcessed()%10)==0) writerlog.flush();
+
 			}
 		} catch (Exception x) {
 			throw x;
 		} finally {
-			idreader.close();
+			try { if (writerlog != null) writerlog.close(); } catch (Exception x) {}
+			try { if (idreader != null) idreader.close(); } catch (Exception x) {}
 			log("archive",String.format("%d policy XML files written into %s directory",getProcessed(),
 					backupDir.getAbsoluteFile()));
 		}
@@ -105,9 +114,15 @@ public class PolicyArchiveHandler extends PolicyHandler {
 			System.out.println(file);
 			if (file.exists()) file.delete();
 			FileWriter writer = new FileWriter(file);
-			writer.write(content);
-			writer.flush();
-			writer.close();
+			try {
+				writer.write(content);
+				writer.flush();
+				if (writerlog!=null) writerlog.write(String.format("%s\tOK\t%s\t%s\n", policyID,file.getAbsoluteFile(),System.currentTimeMillis()));
+			} catch (Exception x) {
+				if (writerlog!=null) writerlog.write(String.format("%s\tERROR\t%s\t%s\n", policyID,x.getMessage(),System.currentTimeMillis()));
+			} finally {
+				writer.close();
+			}
 			return true;
 		}
 				
