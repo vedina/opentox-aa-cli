@@ -13,7 +13,7 @@ OpenTox AA client
  * Command line client  {{{https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.0.jar}Download}}
 	
 ---------------------------------------- 
-	>java jar aacli-1.0.0.jar
+	>java -jar aacli-1.0.0.jar
 	
 	An OpenTox Authentication and Authorization client.
 	usage: org.opentox.aa.opensso.aacli
