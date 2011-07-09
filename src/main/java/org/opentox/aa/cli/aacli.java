@@ -302,12 +302,13 @@ public class aacli {
 						if (confirmed || confirm(String.format("Do you really want to create new policies at %s ?",ssotoken.getAuthService()))) {
 							confirmed = true;
 							int code = policy.sendPolicy(ssotoken,new String(b));
+							now = System.currentTimeMillis() - now;
 							if (HttpURLConnection.HTTP_OK==code)
 								log(command,String.format("Policy '%s' sent in [%s ms]",file.getAbsoluteFile(),now));
 							else
 								log(command,String.format("ERROR %d %s",code));
 						}
-						now = System.currentTimeMillis() - now;
+						
 						
 						record++;
 					}
