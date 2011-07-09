@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>AMBIT2 - JDepend Report Metrics</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="index.html" id="bannerLeft">
+    
+                                    <img src="http://ambit.sourceforge.net/images/ambit-logo.png" alt="" />
+    
+            </a>
+                          <span id="bannerRight">
+    
+                                    <img src="http://ambit.sourceforge.net/images/ambit-version.png" alt="" />
+    
+            </span>
+            <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+              <div class="xright">            <a href="http://toxtree.sourceforge.net" class="externalLink">Toxtree</a>
+            |
+                <a href="http://ecb.jrc.ec.europa.eu/qsar/qsar-tools/index.php?c=TOXMATCH" class="externalLink">Toxmatch</a>
+            |
+                <a href="http://ambit.sourceforge.net" class="externalLink">AMBIT 2.0</a>
+            |
+                <a href="http://apps.ideaconsult.net:8080/ambit2/dataset" class="externalLink">AMBIT REST services</a>
+            |
+                <a href="http://vedina.github.com/opentox-aa-cli" class="externalLink">OpenTox AA</a>
+            |
+                <a href="http://vedina.github.com/Pol" class="externalLink">OpenTox Policy service</a>
+            |
+                <a href="http://toxpredict.org" class="externalLink">ToxPredict</a>
+            
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>OpenTox AA client</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Home</a>
+          </li>
+              
+    <li class="none">
+                    <a href="maven.html">Maven dependency</a>
+          </li>
+              
+    <li class="none">
+                    <a href="cli.html">Command line</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+            
+            
+      
+              
+            <li class="expanded">
+                    <a href="project-reports.html">Project Reports</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="apidocs/index.html">JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+              <strong>JDepend</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="testapidocs/index.html">Test JavaDocs</a>
+          </li>
+              </ul>
+        </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+            <div id="lastPublished">
+        Last Published: 07-09-11
+              </div>
+            </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Metric Results</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+The following document contains the results of a JDepend metric analysis. The various metrics are defined at the bottom of this document.<br />
+<br />
+<a name="summary"></a><h2>Summary</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+<table class="bodyTable"><tr class="a"><th>Package</th>
+<th>TC</th>
+<th>CC</th>
+<th>AC</th>
+<th>Ca</th>
+<th>Ce</th>
+<th>A</th>
+<th>I</th>
+<th>D</th>
+<th>V</th>
+</tr>
+<tr class="b"><td><a href="#org.opentox.aa">org.opentox.aa</a></td>
+<td>5</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>60.000004%</td>
+<td>60.000004%</td>
+<td>20.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#org.opentox.aa.cli">org.opentox.aa.cli</a></td>
+<td>21</td>
+<td>20</td>
+<td>1</td>
+<td>0</td>
+<td>8</td>
+<td>5.0%</td>
+<td>100.0%</td>
+<td>5.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#org.opentox.aa.exception">org.opentox.aa.exception</a></td>
+<td>7</td>
+<td>7</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0.0%</td>
+<td>67.0%</td>
+<td>33.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#org.opentox.aa.opensso">org.opentox.aa.opensso</a></td>
+<td>12</td>
+<td>11</td>
+<td>1</td>
+<td>3</td>
+<td>8</td>
+<td>8.0%</td>
+<td>73.0%</td>
+<td>19.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#org.opentox.aa.policy">org.opentox.aa.policy</a></td>
+<td>4</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>25.0%</td>
+<td>67.0%</td>
+<td>8.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#org.opentox.rest">org.opentox.rest</a></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>3</td>
+<td>0.0%</td>
+<td>60.000004%</td>
+<td>40.0%</td>
+<td>1</td>
+</tr>
+</table>
+<a name="packages"></a><h2>Packages</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<a name="org.opentox.aa"></a><h3>org.opentox.aa</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>2</td>
+<td>3</td>
+<td>60.000004%</td>
+<td>60.000004%</td>
+<td>20.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td>org.opentox.aa.IOpenToxUser<br />
+org.opentox.aa.OpenToxPolicy<br />
+org.opentox.aa.OpenToxToken<br />
+</td>
+<td>org.opentox.aa.OTAAParams<br />
+org.opentox.aa.OpenToxUser<br />
+</td>
+<td>org.opentox.aa.cli<br />
+org.opentox.aa.opensso<br />
+</td>
+<td>java.lang<br />
+java.util<br />
+org.opentox.aa.opensso<br />
+</td>
+</tr>
+</table>
+<a name="org.opentox.aa.cli"></a><h3>org.opentox.aa.cli</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>0</td>
+<td>8</td>
+<td>5.0%</td>
+<td>100.0%</td>
+<td>5.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td>org.opentox.aa.cli.aacli$_option<br />
+</td>
+<td>org.opentox.aa.cli.FileListFilter<br />
+org.opentox.aa.cli.InvalidCredentials<br />
+org.opentox.aa.cli.MissingParameterException<br />
+org.opentox.aa.cli.UserCancelledException<br />
+org.opentox.aa.cli.aacli<br />
+org.opentox.aa.cli.aacli$1<br />
+org.opentox.aa.cli.aacli$2<br />
+org.opentox.aa.cli.aacli$3<br />
+org.opentox.aa.cli.aacli$_option$1<br />
+org.opentox.aa.cli.aacli$_option$10<br />
+org.opentox.aa.cli.aacli$_option$11<br />
+org.opentox.aa.cli.aacli$_option$2<br />
+org.opentox.aa.cli.aacli$_option$3<br />
+org.opentox.aa.cli.aacli$_option$4<br />
+org.opentox.aa.cli.aacli$_option$5<br />
+org.opentox.aa.cli.aacli$_option$6<br />
+org.opentox.aa.cli.aacli$_option$7<br />
+org.opentox.aa.cli.aacli$_option$8<br />
+org.opentox.aa.cli.aacli$_option$9<br />
+org.opentox.aa.cli.aacli$policy_command<br />
+</td>
+<td><i>None</i></td>
+<td>java.io<br />
+java.lang<br />
+java.util<br />
+java.util.logging<br />
+org.apache.commons.cli<br />
+org.opentox.aa<br />
+org.opentox.aa.opensso<br />
+org.opentox.aa.policy<br />
+</td>
+</tr>
+</table>
+<a name="org.opentox.aa.exception"></a><h3>org.opentox.aa.exception</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>1</td>
+<td>2</td>
+<td>0.0%</td>
+<td>67.0%</td>
+<td>33.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td><i>None</i></td>
+<td>org.opentox.aa.exception.AAException<br />
+org.opentox.aa.exception.AALogoutException<br />
+org.opentox.aa.exception.AAPropertiesException<br />
+org.opentox.aa.exception.AAServiceNotAvailable<br />
+org.opentox.aa.exception.AATokenValidationException<br />
+org.opentox.aa.exception.AAUnauthorizedException<br />
+org.opentox.aa.exception.AuthzException<br />
+</td>
+<td>org.opentox.aa.opensso<br />
+</td>
+<td>java.lang<br />
+org.opentox.rest<br />
+</td>
+</tr>
+</table>
+<a name="org.opentox.aa.opensso"></a><h3>org.opentox.aa.opensso</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>3</td>
+<td>8</td>
+<td>8.0%</td>
+<td>73.0%</td>
+<td>19.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td>org.opentox.aa.opensso.AAServicesConfig$CONFIG<br />
+</td>
+<td>org.opentox.aa.opensso.AAServicesConfig<br />
+org.opentox.aa.opensso.AAServicesConfig$1<br />
+org.opentox.aa.opensso.AAServicesConfig$CONFIG$1<br />
+org.opentox.aa.opensso.AAServicesConfig$CONFIG$2<br />
+org.opentox.aa.opensso.AAServicesConfig$CONFIG$3<br />
+org.opentox.aa.opensso.AAServicesConfig$CONFIG$4<br />
+org.opentox.aa.opensso.OpenSSOPolicy<br />
+org.opentox.aa.opensso.OpenSSOPolicy$1<br />
+org.opentox.aa.opensso.OpenSSOPolicy$2<br />
+org.opentox.aa.opensso.OpenSSOPolicy$3<br />
+org.opentox.aa.opensso.OpenSSOToken<br />
+</td>
+<td>org.opentox.aa<br />
+org.opentox.aa.cli<br />
+org.opentox.aa.policy<br />
+</td>
+<td>java.io<br />
+java.lang<br />
+java.net<br />
+java.util<br />
+org.opentox.aa<br />
+org.opentox.aa.exception<br />
+org.opentox.aa.policy<br />
+org.opentox.rest<br />
+</td>
+</tr>
+</table>
+<a name="org.opentox.aa.policy"></a><h3>org.opentox.aa.policy</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>2</td>
+<td>4</td>
+<td>25.0%</td>
+<td>67.0%</td>
+<td>8.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td>org.opentox.aa.policy.IPolicyHandler<br />
+</td>
+<td>org.opentox.aa.policy.Policies<br />
+org.opentox.aa.policy.PolicyArchiveHandler<br />
+org.opentox.aa.policy.PolicyHandler<br />
+</td>
+<td>org.opentox.aa.cli<br />
+org.opentox.aa.opensso<br />
+</td>
+<td>java.io<br />
+java.lang<br />
+java.util<br />
+org.opentox.aa.opensso<br />
+</td>
+</tr>
+</table>
+<a name="org.opentox.rest"></a><h3>org.opentox.rest</h3>
+<table class="bodyTable"><tr class="b"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="a"><td>2</td>
+<td>3</td>
+<td>0.0%</td>
+<td>60.000004%</td>
+<td>40.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="b"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="a"><td><i>None</i></td>
+<td>org.opentox.rest.HTTPClient<br />
+org.opentox.rest.RestException<br />
+</td>
+<td>org.opentox.aa.exception<br />
+org.opentox.aa.opensso<br />
+</td>
+<td>java.io<br />
+java.lang<br />
+java.net<br />
+</td>
+</tr>
+</table>
+<a name="cycles"></a><h2>Cycles</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+<table class="bodyTable"><tr class="b"><th>Package</th>
+<th>Package Dependencies</th>
+</tr>
+<tr class="a"><td>org.opentox.aa</td>
+<td>org.opentox.aa.opensso<br />
+org.opentox.aa.policy<br />
+org.opentox.aa.opensso<br />
+</td>
+</tr>
+<tr class="b"><td>org.opentox.aa.cli</td>
+<td>org.opentox.aa.policy<br />
+org.opentox.aa.opensso<br />
+org.opentox.aa.policy<br />
+</td>
+</tr>
+<tr class="a"><td>org.opentox.aa.opensso</td>
+<td>org.opentox.aa.policy<br />
+org.opentox.aa.opensso<br />
+</td>
+</tr>
+<tr class="b"><td>org.opentox.aa.policy</td>
+<td>org.opentox.aa.opensso<br />
+org.opentox.aa.policy<br />
+</td>
+</tr>
+</table>
+<a name="explanations"></a><h2>Explanation</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+The following explanations are for quick reference and are lifted directly from the original JDepend documentation.<br />
+<br />
+<table class="bodyTable"><tr class="a"><th>Term</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>Number of Classes</td>
+<td>The number of concrete and abstract classes (and interfaces) in the package is an indicator of the extensibility of the package.</td>
+</tr>
+<tr class="a"><td>Afferent Couplings</td>
+<td>The number of other packages that depend upon classes within the package is an indicator of the package's responsibility.</td>
+</tr>
+<tr class="b"><td>Efferent Couplings</td>
+<td>The number of other packages that the classes in the package depend upon is an indicator of the package's independence.</td>
+</tr>
+<tr class="a"><td>Abstractness</td>
+<td>The ratio of the number of abstract classes (and interfaces) in the analyzed package to the total number of classes in the analyzed package. The range for this metric is 0 to 1, with A=0 indicating a completely concrete package and A=1 indicating a completely abstract package.</td>
+</tr>
+<tr class="b"><td>Instability</td>
+<td>The ratio of efferent coupling (Ce) to total coupling (Ce / (Ce + Ca)). This metric is an indicator of the package's resilience to change. The range for this metric is 0 to 1, with I=0 indicating a completely stable package and I=1 indicating a completely instable package.</td>
+</tr>
+<tr class="a"><td>Distance</td>
+<td>The perpendicular distance of a package from the idealized line A + I = 1. This metric is an indicator of the package's balance between abstractness and stability. A package squarely on the main sequence is optimally balanced with respect to its abstractness and stability. Ideal packages are either completely abstract and stable (x=0, y=1) or completely concrete and instable (x=1, y=0). The range for this metric is 0 to 1, with D=0 indicating a package that is coincident with the main sequence and D=1 indicating a package that is as far from the main sequence as possible.</td>
+</tr>
+<tr class="b"><td>Cycles</td>
+<td>Packages participating in a package dependency cycle are  in a deadly embrace with respect to reusability and their  release cycle. Package dependency cycles can be easily identified by reviewing the textual reports of dependency cycles. Once these dependency cycles have been identified with JDepend, they can be broken by employing various object-oriented techniques.</td>
+</tr>
+</table>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2010-2011
+    
+          Ideaconsult
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

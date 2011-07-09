@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>AMBIT2 - OpenTox Authentication and Authorization library</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          <meta name="author" content="Background" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                  <a href="index.html" id="bannerLeft">
+    
+                                    <img src="http://ambit.sourceforge.net/images/ambit-logo.png" alt="" />
+    
+            </a>
+                          <span id="bannerRight">
+    
+                                    <img src="http://ambit.sourceforge.net/images/ambit-version.png" alt="" />
+    
+            </span>
+            <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+              <div class="xright">            <a href="http://toxtree.sourceforge.net" class="externalLink">Toxtree</a>
+            |
+                <a href="http://ecb.jrc.ec.europa.eu/qsar/qsar-tools/index.php?c=TOXMATCH" class="externalLink">Toxmatch</a>
+            |
+                <a href="http://ambit.sourceforge.net" class="externalLink">AMBIT 2.0</a>
+            |
+                <a href="http://apps.ideaconsult.net:8080/ambit2" class="externalLink">AMBIT REST services</a>
+            |
+                <a href="http://vedina.github.com/opentox-aa-cli" class="externalLink">OpenTox AA</a>
+            |
+                <a href="http://vedina.github.com/Pol" class="externalLink">OpenTox Policy service</a>
+            |
+                <a href="http://toxpredict.org" class="externalLink">ToxPredict</a>
+            
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>OpenTox AA client</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Home</a>
+          </li>
+              
+    <li class="none">
+                    <a href="maven.html">Maven dependency</a>
+          </li>
+              
+    <li class="none">
+              <strong>Command line</strong>
+        </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+            <div id="lastPublished">
+        Last Published: 07-09-11
+              </div>
+            </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>OpenTox AA client</h2>
+<p>A java client library and a command line tool for accessing OpenTox authentication and authorization services.</p>
+<div class="section"><h3>Command line client</h3>
+<div class="source"><pre>        &gt;java jar opentox-opensso-{version}.jar
+        
+        An OpenTox Authentication and Authorization client.
+        usage: org.opentox.aa.opensso.aacli
+         -b,--backupdir &lt;Directory&gt;     Directory to archive policy XML files
+                                        Default value:  C:\Users\nina\AppData\Local\Temp\
+         -c,--command &lt;the command&gt;     The command to be performed. One of
+                                        authorize|list|delete|create|archive Default value:  authorize
+         -h,--help                      OpenTox Authentication and Authorization
+                                        client
+         -i,--policyid &lt;policyid&gt;       An OpenSSO/OpenAM policy identifier
+         -m,--max &lt;number of records&gt;   Max number of records Default value:  all
+         -n,--authn &lt;URI&gt;               URI of OpenSSO/OpenAM service Default
+                                        value:  http://pirin.uni-plovdiv.bg:8080/opensso/identity
+         -p,--password &lt;password&gt;       OpenTox user password
+         -r,--uri &lt;URI&gt;                 URI of an OpenTox resource
+         -s,--subjectid &lt;token&gt;         OpenSSO/OpenAM token. If the token is
+                                        present, user and password are ignored.
+         -u,--user &lt;username&gt;           OpenTox user name
+         -z,--authz &lt;URI&gt;               URI of OpenTox policy service Default
+                                        value:  http://pirin.uni-plovdiv.bg:8080/Pol/opensso-pol
+        Examples:
+        Verify authorization:
+                java -jar aacli
+                -n http://opensso.in-silico.ch/opensso/identity
+                -z http://opensso.in-silico.ch/Pol/opensso-pol
+                -u guest
+                -p guest
+                -r https://ambit.uni-plovdiv.bg:8443/ambit2/dataset/1
+                -c authorize
+        Retrieve all policies per URI:
+                java -jar aacli
+                -n http://opensso.in-silico.ch/opensso/identity
+                -z http://opensso.in-silico.ch/Pol/opensso-pol
+                -u guest
+                -p guest
+                -r http://blabla.uni-plovdiv.bg:8080/ambit2/dataset/999
+                -c list
+        Retrieve policy content by policy id
+                java -jar aacli
+                -n http://opensso.in-silico.ch/opensso/identity
+                -z http://opensso.in-silico.ch/Pol/opensso-pol
+                -u guest
+                -p guest
+                -i member_rohttpsambit.uni-plovdiv.bg8443ambit2dataset1
+                -c list
+        Retriewe and store locally XML files for the user:
+                java -jar aacli
+                -n http://opensso.in-silico.ch/opensso/identity
+                -z http://opensso.in-silico.ch/Pol/opensso-pol
+                -u guest
+                -p guest
+                -b /tmp
+                -c archive
+        Create new policies from a backup directory of XML files:
+                java -jar aacli
+                -n your-sso-server
+                -z your-policy-server
+                -u your-user
+                -p your-pass
+                -b /tmp
+                -c create
+        Delete policy by policy id:
+                java -jar aacli
+                -u guest
+                -p guest
+                -i guest_c35ceda9-e548-47d6-a377-ac2cae708100
+                -c delete
+        Delete all policies per URI:
+                java -jar aacli
+                -u guest
+                -p guest
+                -r http://blabla.uni-plovdiv.bg:8080/ambit2/dataset/999
+                -c delete
+        Delete all policies per user:
+                java -jar aacli
+                -u guest
+                -p guest
+                -c delete
+                </pre>
+</div>
+</div>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2010-2011
+    
+          Ideaconsult
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

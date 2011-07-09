@@ -12,14 +12,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>AMBIT2 - OpenTox Authentication and Authorization library</title>
+    <title>AMBIT2 - Team list</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
       @import url("./css/site.css");
     </style>
     <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
-          <meta name="author" content="Background" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
       </head>
   <body class="composite">
@@ -87,8 +86,8 @@
             <ul>
               
     <li class="none">
-              <strong>Home</strong>
-        </li>
+                    <a href="index.html">Home</a>
+          </li>
               
     <li class="none">
                     <a href="maven.html">Maven dependency</a>
@@ -119,13 +118,55 @@
             
       
             
-      
+            
             
       
               
-        <li class="collapsed">
+            <li class="expanded">
                     <a href="project-info.html">Project Information</a>
-                </li>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="integration.html">Continuous Integration</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="dependencies.html">Dependencies</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="issue-tracking.html">Issue Tracking</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="mail-lists.html">Mailing Lists</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="plugin-management.html">Plugin Management</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="license.html">Project License</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="plugins.html">Project Plugins</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="project-summary.html">Project Summary</a>
+          </li>
+                  
+    <li class="none">
+              <strong>Project Team</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="source-repository.html">Source Repository</a>
+          </li>
+              </ul>
+        </li>
               
                 
               
@@ -157,14 +198,50 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2>OpenTox AA client</h2>
-<p>A java client library and a command line tool for accessing <a href="http://opentox.org" class="externalLink">OpenTox</a> <a href="http://opentox.org/dev/apis/api-1.2/AA" class="externalLink">authentication and authorization</a> services.</p>
-<ul><li>Use as <a href="/maven.html">Maven dependency</a>.</li>
-<li>Download opentox-opensso-[version]-jar-with-dependencies.jar from the <a href="http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;quick~opentox-opensso" class="externalLink">Maven repository</a></li>
-<li>Use as <a href="/cli.html">command line tool</a>.</li>
-</ul>
+        <div class="section"><h2>The Team</h2>
+<p>A successful project requires many people to play many roles. Some members write code or documentation, while others are valuable as testers, submitting patches and suggestions.</p>
+<p>The team is comprised of Members and Contributors. Members have direct access to the source of a project and actively evolve the code-base. Contributors improve the project through submission of patches and suggestions to the Members. The number of Contributors to the project is unbounded. Get involved today. All contributions to the project are greatly appreciated.</p>
+<div class="section"><h3>Members</h3>
+<p>The following is a list of developers with commit privileges that have directly contributed to the project in one way or another.</p>
+<table class="bodyTable"><tr class="a"><th>Id</th>
+<th>Name</th>
+<th>Email</th>
+<th>URL</th>
+<th>Roles</th>
+<th>Time Zone</th>
+<th>Actual Time (GMT)</th>
+</tr>
+<tr class="b"><td><a name="vedina"></a>vedina</td>
+<td>Nina Jeliazkova</td>
+<td><a href="mailto:jeliazkova.nina@gmail.com" class="externalLink">jeliazkova.nina@gmail.com</a></td>
+<td><a href="https://github.com/vedina" class="externalLink">https://github.com/vedina</a></td>
+<td>System Architecture, Java Developer</td>
+<td>CEST</td>
+<td><span id="developer-0">CEST</span></td>
+</tr>
+</table>
 </div>
+<div class="section"><h3>Contributors</h3>
+<p>There are no contributors listed for this project. Please check back again later.</p>
+</div>
+</div>
+<script type="text/javascript">
+function offsetDate(id, offset) {
+    var now = new Date();
+    var nowTime = now.getTime();
+    var localOffset = now.getTimezoneOffset();
+    var developerTime = nowTime + ( offset * 60 * 60 * 1000 )+ ( localOffset * 60 * 1000 );
+    var developerDate = new Date(developerTime);
 
+    document.getElementById(id).innerHTML = developerDate;
+}
+
+function init(){
+    offsetDate('developer-0', 'CEST');
+}
+
+window.onLoad = init();
+</script>
       </div>
     </div>
     <div class="clear">
