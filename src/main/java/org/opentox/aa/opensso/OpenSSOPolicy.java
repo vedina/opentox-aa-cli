@@ -126,10 +126,14 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		return sendPolicy(token,p);
 		
 	}	
-	
+	final static String xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+	final static String dtd = "<!DOCTYPE Policies PUBLIC \"-//Sun Java System Access Manager7.1 2006Q3  Admin CLI DTD//EN\" \"jar://com/sun/identity/policy/policyAdmin.dtd\">";
 	public int sendPolicy(OpenSSOToken token,String xml) throws Exception {
 
-		
+		//if DTD is missing, the OpenSSO service returns "no grammar" error
+		if (xml.indexOf("policyAdmin.dtd")<0) {
+			xml = xml.replace(xmlheader, String.format("%s\n%s\n",xmlheader,dtd));
+		}
 		System.out.println(xml);
 		HTTPClient client = new HTTPClient(policyService);
 		
@@ -138,7 +142,9 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		try {
 			
 			client.post(xml,"application/xml");
-			return client.getStatus();
+			
+			if (HttpURLConnection.HTTP_OK==client.getStatus()) return client.getStatus();
+			else throw new RestException(client.getStatus(),client.getStatusMessage());
 			
 		} catch (RestException x) {
 			x.printStackTrace();

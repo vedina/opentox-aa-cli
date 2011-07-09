@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FilenameFilter;
+import java.net.HttpURLConnection;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -299,8 +300,11 @@ public class aacli {
 						log(command,String.format("Preparing to send '%s' to the policy service at %s ...",file.getAbsoluteFile(),policy.getPolicyService()));
 						if (confirmed || confirm(String.format("Do you really want to create new policies at %s ?",ssotoken.getAuthService()))) {
 							confirmed = true;
-							policy.sendPolicy(ssotoken,new String(b));
-							log(command,String.format("Policy '%s' sent in [%s ms]",file.getAbsoluteFile(),now));
+							int code = policy.sendPolicy(ssotoken,new String(b));
+							if (HttpURLConnection.HTTP_OK==code)
+								log(command,String.format("Policy '%s' sent in [%s ms]",file.getAbsoluteFile(),now));
+							else
+								log(command,String.format("ERROR %d %s",code));
 						}
 						now = System.currentTimeMillis() - now;
 						
@@ -332,7 +336,7 @@ public class aacli {
 			if ("Y".equals(confirm.trim().toUpperCase())) return true;
 			if ("Q".equals(confirm.trim().toUpperCase())) throw new UserCancelledException();
 		}
-		return false;
+		return true;
 	}
 	
 	public void setOption(_option option, String argument) throws Exception {
