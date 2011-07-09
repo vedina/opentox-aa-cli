@@ -14,7 +14,7 @@
       <item name="Toxtree" href="http://toxtree.sourceforge.net"/>
       <item name="Toxmatch" href="http://ecb.jrc.ec.europa.eu/qsar/qsar-tools/index.php?c=TOXMATCH"/>
       <item name="AMBIT 2.0" href="http://ambit.sourceforge.net"/>
-      <item name="AMBIT REST services" href="http://apps.ideaconsult.net:8080/ambit2"/>
+      <item name="AMBIT REST services" href="http://apps.ideaconsult.net:8080/ambit2/dataset"/>
       <item name="OpenTox AA" href="http://vedina.github.com/opentox-aa-cli"/>
       <item name="OpenTox Policy service" href="http://vedina.github.com/Pol"/>
       <item name="ToxPredict" href="http://toxpredict.org"/>
