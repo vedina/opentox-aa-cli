@@ -205,13 +205,15 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		return getURIOwner(token, uri, user, new PolicyHandler() {
 	
 			@Override
-			public void handlePolicy(String policyID, String content) throws Exception {
+			public boolean handlePolicy(String policyID, String content) throws Exception {
 				policies.put(policyID,content);
+				return true;
 			}
 			
 			@Override
-			public void handlePolicy(String policyID) throws Exception {
+			public boolean handlePolicy(String policyID) throws Exception {
 				policies.put(policyID,policyID);
+				return true;
 				
 			}
 		});		
@@ -271,14 +273,15 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		return listPolicy(token, policyId, new PolicyHandler() {
 
 			@Override
-			public void handlePolicy(String policyID, String content) throws Exception {
+			public boolean handlePolicy(String policyID, String content) throws Exception {
 				policies.put(policyID,content);
+				return true;
 			}
 			
 			@Override
-			public void handlePolicy(String policyID) throws Exception {
+			public boolean handlePolicy(String policyID) throws Exception {
 				policies.put(policyID,policyID);
-				
+				return true;
 			}
 		});
 	}
@@ -305,12 +308,16 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 					b.append(line);
 					b.append("\n");
 				}
-				handler.handlePolicy(policyId, b.toString());
-
+				try {
+					handler.handlePolicy(policyId, b.toString());
+				} catch (Exception x) {
+					handler.handleError(policyId, b.toString(), x);
+				}
 				
 			} 
 			return client.getStatus().getCode();
 		} catch (ResourceException x) {
+			x.printStackTrace();
 			throw new ResourceException(x.getStatus(),
 					String.format("Error querying policy service PolicyID=%s subjectid=%s %s %d %s",
 					policyService,policyId,token.getToken(),x.getStatus().getCode(), x.getMessage()),
@@ -332,14 +339,16 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		return listPolicies(token, new PolicyHandler() {
 
 			@Override
-			public void handlePolicy(String policyID, String content)
+			public boolean handlePolicy(String policyID, String content)
 					throws Exception {
 				policies.put(policyID,content);
+				return true;
 				
 			}
 			@Override
-			public void handlePolicy(String policyID) {
+			public boolean handlePolicy(String policyID) {
 				policies.put(policyID,policyID);
+				return true;
 			}
 		});
 	}
@@ -366,9 +375,13 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 				String line = null;
 	
 				while ((line = reader.readLine())!=null) {
-					if ("".equals(line.trim())) continue;
-					handler.handlePolicy(line.trim());
-
+					String policyID = line.trim();
+					if ("".equals(policyID)) continue;
+					try {
+						handler.handlePolicy(policyID);
+					} catch (Exception x) {
+						handler.handleError(policyID, null, x);
+					}
 				}
 				
 			} 

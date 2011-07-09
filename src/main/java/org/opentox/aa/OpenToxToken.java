@@ -10,6 +10,9 @@ public abstract class OpenToxToken {
 	protected String token;
 	protected String authService;
 
+	public String getAuthService() {
+		return authService;
+	}
 	public OpenToxToken(String authService) {
 		this.authService = authService;
 		this.token = null;

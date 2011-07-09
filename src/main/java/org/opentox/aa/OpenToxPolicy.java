@@ -10,6 +10,9 @@ public abstract class OpenToxPolicy<Token extends OpenToxToken,PolicyContent> {
 	protected static final String MSG_EMPTY_URI = "Empty URI";
 	protected String policyService;
 
+	public String getPolicyService() {
+		return policyService;
+	}
 	public OpenToxPolicy(String policyService) {
 		this.policyService = policyService;
 	}

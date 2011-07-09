@@ -8,19 +8,24 @@ public class PolicyHandler implements IPolicyHandler {
 	}
 
 	@Override
-	public void handlePolicy(String policyID) throws Exception {
+	public boolean handlePolicy(String policyID) throws Exception {
 		processed++;
+		return true;
 	}
 
 	@Override
-	public void handlePolicy(String policyID, String content) throws Exception {
+	public boolean handlePolicy(String policyID, String content) throws Exception {
 		processed++;
-
+		return true;
 	}
 
 	@Override
-	public void handleOwner(String owner) throws Exception {
-
+	public boolean handleOwner(String owner) throws Exception {
+		return true;
 	}
 
+	@Override
+	public boolean handleError(String policyID, String content, Exception x) throws Exception {
+		throw x;
+	}
 }

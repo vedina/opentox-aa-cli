@@ -2,7 +2,8 @@ package org.opentox.aa.policy;
 
 public interface IPolicyHandler {
 	int getProcessed();
-	void handlePolicy(String policyID) throws Exception ;
-	void handlePolicy(String policyID,String content) throws Exception ;
-	void handleOwner(String owner) throws Exception;
+	boolean handlePolicy(String policyID) throws Exception ;
+	boolean handlePolicy(String policyID,String content) throws Exception ;
+	boolean handleOwner(String owner) throws Exception;
+	boolean handleError(String policyID, String content, Exception x) throws Exception ;
 }

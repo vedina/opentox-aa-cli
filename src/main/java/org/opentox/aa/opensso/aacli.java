@@ -2,6 +2,8 @@ package org.opentox.aa.opensso;
 
 import java.io.Console;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilenameFilter;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +32,7 @@ public class aacli {
 	protected policy_command command = policy_command.authorize;
 	protected String backupDir = System.getProperty("java.io.tmpdir");
 	private final static Logger LOGGER = Logger.getLogger(aacli.class .getName());
-	
+	protected int max = -1;
 	
 	enum policy_command {
 		authorize,
@@ -135,22 +137,25 @@ public class aacli {
 			
 			IPolicyHandler handler = new PolicyHandler() {
 				@Override
-				public void handleOwner(String owner) throws Exception {
+				public boolean handleOwner(String owner) throws Exception {
 					super.handleOwner(owner);
 					if (owner !=null)
 					log(command,String.format("Owner: %s",owner));
+					return true;
 					
 				}				
 				@Override
-				public void handlePolicy(String policyID) throws Exception {
+				public boolean handlePolicy(String policyID) throws Exception {
 					super.handlePolicy(policyID);
 					log(command,String.format("PolicyID: %s",policyID));
+					return true;
 				}
 				@Override
-				public void handlePolicy(String policyID, String content)
+				public boolean handlePolicy(String policyID, String content)
 						throws Exception {
 					super.handlePolicy(policyID,content);
 					log(command,String.format("PolicyID: %s \n %s",policyID,content));
+					return true;
 					
 				}
 			};			
@@ -160,15 +165,15 @@ public class aacli {
 		case delete: {
 			IPolicyHandler deleteHandler = new PolicyHandler() {
 				@Override
-				public void handleOwner(String owner) throws Exception {
-					super.handleOwner(owner);
+				public boolean handleOwner(String owner) throws Exception {
+					boolean ok = super.handleOwner(owner);
 					if (owner !=null)
 					log(command,String.format("Owner: %s",owner));
-					
+					return ok;
 				}
 				@Override
-				public void handlePolicy(String policyID) throws Exception {
-					super.handlePolicy(policyID);
+				public boolean handlePolicy(String policyID) throws Exception {
+					boolean ok = super.handlePolicy(policyID);
 					log(command,String.format("Deleting PolicyID: %s",policyID));
 					 try {
 						 long now = System.currentTimeMillis();
@@ -181,11 +186,12 @@ public class aacli {
 					 } catch (Exception x) {
 						log(command,String.format("ERROR: %s",x.getMessage()));
 					 }
+					 return ok;
 				}
 				@Override
-				public void handlePolicy(String policyID, String content)
+				public boolean handlePolicy(String policyID, String content)
 						throws Exception {
-					super.handlePolicy(policyID,content);
+					return super.handlePolicy(policyID,content);
 				}
 			};
 			
@@ -221,10 +227,11 @@ public class aacli {
 				throw new Exception(String.format("Can't create backup directory %s", dir.getAbsoluteFile()),x);
 			}
 			log(command,String.format("Using backup directory %s",dir.getAbsoluteFile()));
-			IPolicyHandler handler = new PolicyArchiveHandler(policy,dir) {
+			PolicyArchiveHandler handler = new PolicyArchiveHandler(policy,dir);
+			/*{
 				@Override
-				public void handlePolicy(String policyID) throws Exception {
-					super.handlePolicy(policyID);
+				public boolean handlePolicy(String policyID) throws Exception {
+					boolean ok = super.handlePolicy(policyID);
 					long now = System.currentTimeMillis();
 					try {
 						policy.listPolicy(ssotoken, policyID, this);
@@ -233,11 +240,47 @@ public class aacli {
 					} catch (Exception x) {
 						log(command,String.format("ERROR retrieving policy %s",policyID));
 					}
+					return ok;
 				}
 			};
-			
+			*/
 			listPolicies(policy, handler);
+			handler.close();
+			handler.backupXML(ssotoken, policy);
 			break;
+		}
+		case create: {
+			
+			File dir = new File(backupDir);
+			if (!dir.exists()) throw new Exception(String.format("Directory %s does not exist!", dir.getAbsoluteFile()));
+			FilenameFilter selectxml = new FileListFilter("policy_", "xml");
+			int record = 0;
+			File[] files = dir.listFiles(selectxml);
+			for (File file:files) {
+				FileInputStream fis= null;
+				try {
+					byte[] b = new byte[(int) file.length()];  
+					fis = new FileInputStream(file);
+					int l = fis.read(b);
+					if (l>0) {
+						//System.out.println(new String(b));
+						long now = System.currentTimeMillis();
+						log(command,String.format("Sending '%s' ...",file.getAbsoluteFile()));
+						//policy.sendPolicy(ssotoken,new String(b));
+						now = System.currentTimeMillis() - now;
+						log(command,String.format("Policy '%s' sent in [%s ms]",file.getAbsoluteFile(),now));
+						record++;
+					}
+				} catch (Exception x) {
+					log(command,String.format("Policy creation '%s' failed. [%s]",file.getAbsoluteFile(),x.getMessage()));
+				} finally {
+					if (fis !=null) fis.close();
+				}
+			}
+			
+			System.out.println(record);
+			break;
+
 		}
 		default : throw new Exception(String.format("%s not supported",command));
 		}
@@ -301,6 +344,13 @@ public class aacli {
 			this.backupDir = argument==null?option.getDefaultValue():argument;
 			break;
 		}
+		case max: {
+			try { 
+				max = Integer.parseInt(argument);
+			} catch (Exception x) {
+				max = -1;
+			}
+		}
 		default: 
 		}
 	}
@@ -347,6 +397,7 @@ public class aacli {
 		} catch (UserCancelledException x) {
 			System.out.println(x.getMessage());
 		} catch (Exception x ) {
+			x.printStackTrace();
 			printHelp(options,x.getMessage());
 		} finally {
 			try { 
@@ -511,6 +562,24 @@ public class aacli {
 				return System.getProperty("java.io.tmpdir");
 			}			
 		},
+		max {
+			@Override
+			public String getArgName() {
+				return "number of records";
+			}
+			@Override
+			public String getDescription() {
+				return "Max number of records";
+			}
+			@Override
+			public String getShortName() {
+				return "m";
+			}
+			@Override
+			public String getDefaultValue() {
+				return "all";
+			}			
+		},		
 		help {
 			@Override
 			public String getArgName() {
@@ -658,3 +727,27 @@ public class aacli {
 		Runtime.getRuntime().exit(0);	
 	}
 }
+
+class FileListFilter implements FilenameFilter {
+	  private String name; 
+
+	  private String extension; 
+
+	  public FileListFilter(String name, String extension) {
+	    this.name = name;
+	    this.extension = extension;
+	  }
+
+	  public boolean accept(File directory, String filename) {
+	    boolean fileOK = true;
+
+	    if (name != null) {
+	      fileOK &= filename.startsWith(name);
+	    }
+
+	    if (extension != null) {
+	      fileOK &= filename.endsWith('.' + extension);
+	    }
+	    return fileOK;
+	  }
+	}
