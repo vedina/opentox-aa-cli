@@ -134,7 +134,7 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		if (xml.indexOf("policyAdmin.dtd")<0) {
 			xml = xml.replace(xmlheader, String.format("%s\n%s\n",xmlheader,dtd));
 		}
-		System.out.println(xml);
+		//System.out.println(xml);
 		HTTPClient client = new HTTPClient(policyService);
 		
 		client.setHeaders(new String[][] {{OTAAParams.subjectid.toString(), token.getToken()}});

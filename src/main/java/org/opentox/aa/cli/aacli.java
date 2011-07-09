@@ -275,7 +275,7 @@ public class aacli {
 				log(command,String.format("Reading %s",serversFile.getAbsoluteFile() ));
 				String line = null;
 				while ((line = reader.readLine())!=null)
-					log(command,line);
+					log(command,String.format("The policies were retrieved from: %s", line));
 			} catch (Exception x) {
 				if (!confirm(String.format("ERROR reading %s! Is this a backup directory?",serversFile.getAbsoluteFile())))
 					throw new UserCancelledException();
@@ -287,6 +287,7 @@ public class aacli {
 			FilenameFilter selectxml = new FileListFilter("policy_", "xml");
 			int record = 0;
 			File[] files = dir.listFiles(selectxml);
+			log(command,String.format("There are %d policy_*.xml files in %s",files.length,dir.getAbsoluteFile()));
 			boolean confirmed = false;
 			for (File file:files) {
 				FileInputStream fis= null;
@@ -321,7 +322,7 @@ public class aacli {
 				}
 			}
 			
-			System.out.println(record);
+			log(command,String.format("Created %d policies",record));
 			break;
 
 		}
