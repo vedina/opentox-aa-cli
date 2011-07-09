@@ -1,9 +1,12 @@
 package org.opentox.aa.opensso;
 
+import java.io.BufferedReader;
 import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FilenameFilter;
+import java.io.InvalidClassException;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,11 +62,14 @@ public class aacli {
 		if (ssotoken==null) ssotoken = new OpenSSOToken(authService);
 		if (ssotoken.getToken()==null) {
 			ssotoken.login(user);
+			if (ssotoken.getToken()==null) {
+				throw new InvalidCredentials(authService);
+			} else
 			System.out.println(String.format("Logged as %s token %s",user.getUsername(),ssotoken.getToken()));
 		} else {
 			System.out.println(String.format("Using provided token %s",ssotoken.getToken()));
 			if (!ssotoken.isTokenValid()) {
-				throw new Exception("Invalid token");
+				throw new InvalidCredentials("Invalid token submited to ");
 			}
 		}
 		ssotoken.getAttributes(new String[] {"uid"},results);
@@ -71,9 +77,13 @@ public class aacli {
 		
 	}
 	public void logout() throws Exception {
-		System.out.println("Invalidating the token ...");
-		if ((ssotoken!=null) && (ssotoken.getToken()!=null)) ssotoken.logout();
-		System.out.println("Logout completed. The token is no longer valid.");
+
+		if ((ssotoken!=null) && (ssotoken.getToken()!=null)) {
+			System.out.println("Invalidating the token ...");
+			ssotoken.logout();
+			System.out.println("Logout completed. The token is no longer valid.");
+		}
+		
 	}
 	protected void log(policy_command command, String message) {
 		System.out.println(String.format("%s> %s",command, message));
@@ -253,9 +263,27 @@ public class aacli {
 			
 			File dir = new File(backupDir);
 			if (!dir.exists()) throw new Exception(String.format("Directory %s does not exist!", dir.getAbsoluteFile()));
+			
+			File serversFile = new File(backupDir,"servers.txt");
+			BufferedReader reader = null;
+			try {
+				reader = new BufferedReader(new FileReader(serversFile));
+				log(command,String.format("Reading %s",serversFile.getAbsoluteFile() ));
+				String line = null;
+				while ((line = reader.readLine())!=null)
+					log(command,line);
+			} catch (Exception x) {
+				if (!confirm(String.format("ERROR reading %s! Is this a backup directory?",serversFile.getAbsoluteFile())))
+					throw new UserCancelledException();
+						
+			} finally {
+				if (reader !=null) reader.close();
+			}
+			
 			FilenameFilter selectxml = new FileListFilter("policy_", "xml");
 			int record = 0;
 			File[] files = dir.listFiles(selectxml);
+			boolean confirmed = false;
 			for (File file:files) {
 				FileInputStream fis= null;
 				try {
@@ -265,14 +293,22 @@ public class aacli {
 					if (l>0) {
 						//System.out.println(new String(b));
 						long now = System.currentTimeMillis();
-						log(command,String.format("Sending '%s' ...",file.getAbsoluteFile()));
-						//policy.sendPolicy(ssotoken,new String(b));
+						log(command,String.format("Preparing to send '%s' to the policy service at %s ...",file.getAbsoluteFile(),policy.getPolicyService()));
+						if (confirmed || confirm(String.format("Do you really want to create new policies at %s ?",ssotoken.getAuthService()))) {
+							confirmed = true;
+							policy.sendPolicy(ssotoken,new String(b));
+							log(command,String.format("Policy '%s' sent in [%s ms]",file.getAbsoluteFile(),now));
+						}
 						now = System.currentTimeMillis() - now;
-						log(command,String.format("Policy '%s' sent in [%s ms]",file.getAbsoluteFile(),now));
+						
 						record++;
 					}
+				} catch (InvalidCredentials x) {
+					throw x;					
+				} catch (UserCancelledException x) {
+					throw x;
 				} catch (Exception x) {
-					log(command,String.format("Policy creation '%s' failed. [%s]",file.getAbsoluteFile(),x.getMessage()));
+					log(command,String.format("Policy creation '%s' failed. [%s]",file.getAbsoluteFile(),x));
 				} finally {
 					if (fis !=null) fis.close();
 				}
@@ -286,11 +322,12 @@ public class aacli {
 		}
 		return 0;
 	}
-	protected boolean confirm(String message) {
+	protected boolean confirm(String message) throws UserCancelledException {
 		Console c = System.console();
 		if (c!=null) {
-			String confirm = c.readLine(String.format("Hope you know what are you doing.\n%s\nEnter Y or N:",message));
+			String confirm = c.readLine(String.format("Hope you know what are you doing.\n%s\nEnter Y, N or Q to quit:",message));
 			if ("Y".equals(confirm.trim().toUpperCase())) return true;
+			if ("Q".equals(confirm.trim().toUpperCase())) throw new UserCancelledException();
 		}
 		return false;
 	}
@@ -394,6 +431,8 @@ public class aacli {
 		    	printHelp(options,null);
 		    }		
 		       */    
+		} catch (InvalidCredentials x) {
+			System.out.println(x.getMessage());
 		} catch (UserCancelledException x) {
 			System.out.println(x.getMessage());
 		} catch (Exception x ) {
@@ -652,6 +691,19 @@ public class aacli {
 
 	}	
 	
+	protected static String exampleCreatePolicies() {
+		return
+		"Create new policies from a backup directory of XML files:\n"+
+		"\tjava -jar aacli\n"+
+		"\t-n your-sso-server\n"+
+		"\t-z your-policy-server\n"+
+		"\t-u your-user\n"+
+		"\t-p your-pass\n"+
+		"\t-b /tmp\n"+
+		"\t-c create";
+		
+
+	}	
 	
 	protected static String exampleRetrievePolicyContent() {
 		return
@@ -719,6 +771,7 @@ public class aacli {
 	    System.out.println(exampleRetrievePoliciesPerURI());
 	    System.out.println(exampleRetrievePolicyContent());
 	    System.out.println(exampleArchivePolicies());
+	    System.out.println(exampleCreatePolicies());
 	    System.out.println(exampleDeletePolicy());
 	    System.out.println(exampleDeletePolicyURI());
 	    System.out.println(exampleDeletePolicyUser());
