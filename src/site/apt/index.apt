@@ -9,9 +9,15 @@ OpenTox AA client
 ~~~~~~~  
   A java client library and a command line tool for accessing {{{http://opentox.org}OpenTox}} {{{http://opentox.org/dev/apis/api-1.2/AA}authentication and authorization}} services.
   
-   * Use as  {{{/maven.html}Maven dependency}}.
+   * Use as  {{{maven.html}Maven dependency}}.
 
-   * Download opentox-opensso-[version]-jar-with-dependencies.jar  from the {{{http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;quick~opentox-opensso}Maven repository}}
+   * Download the {{{https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.0.jar}command line client}}
+    
+   * Download the release from {{{https://github.com/vedina/opentox-aa-cli/archives/opentox-aa-client-1.0.0}GitHub}}
+
+   * Download from the {{{http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;quick~opentox-opensso}Maven repository}}
       
-   * Use as  {{{/cli.html}command line tool}}.
+   * Use as  {{{cli.html}command line tool}}.
+   
+   * View source at {{{https://github.com/vedina/opentox-aa-cli}GitHub}}
    
