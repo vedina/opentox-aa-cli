@@ -1,7 +1,6 @@
 package org.opentox.aa.exception;
 
-import org.restlet.data.Status;
-import org.restlet.resource.ResourceException;
+import org.opentox.rest.RestException;
 
 
 /**
@@ -9,11 +8,12 @@ import org.restlet.resource.ResourceException;
  * @author Nina Jeliazkova
  *
  */
-public class AAException extends ResourceException {
+public class AAException extends RestException {
 
-	public AAException(Status status, String description, Throwable cause) {
+	public AAException(int status, String description, Throwable cause) {
 		super(status, description, cause);
 	}
+
 
 	/**
 	 * 

@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FilenameFilter;
-import java.io.InvalidClassException;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,11 +43,11 @@ public class aacli {
 		create,
 		archive
 	}
-	public aacli() {
+	public aacli() throws Exception {
 		super();
+		user = new OpenToxUser();
 		authService = AAServicesConfig.getSingleton().getConfig(CONFIG.opensso);
 		policyService = AAServicesConfig.getSingleton().getConfig(CONFIG.policy);
-		user = new OpenToxUser();
 		user.setUserName(AAServicesConfig.getSingleton().getConfig(CONFIG.user));
 		user.setPassword(AAServicesConfig.getSingleton().getConfig(CONFIG.pass));
 		LOGGER.setLevel(Level.OFF);
@@ -132,7 +131,8 @@ public class aacli {
 		
 		switch (command) {
 		case authorize: {
-			if (uri==null) throw new MissingParameterException(String.format("%s>",command,"Missing URI. Have you specified an argument to the -r option?"));
+			if ((uri==null)||"".equals(uri.trim()))
+					throw new MissingParameterException(String.format("%s>%s",command,"Missing URI. Have you specified an argument to the -r option?"));
 			log(command,String.format("URI: %s",uri));
 			String[] mm = new String[] {"GET","POST","PUT","DELETE"};
 			for (String m : mm)
@@ -395,9 +395,10 @@ public class aacli {
 
     	Options options = createOptions();
     	
-    	aacli cli = new aacli();
+    	aacli cli=null;
     	CommandLineParser parser = new PosixParser();
 		try {
+			cli = new aacli();
 		    CommandLine line = parser.parse( options, args,false );
 		    if (line.hasOption(_option.help.name())) {
 		    	printHelp(options, null);
@@ -442,7 +443,7 @@ public class aacli {
 			printHelp(options,x.getMessage());
 		} finally {
 			try { 
-				cli.logout(); 
+				if(cli!=null) cli.logout(); 
 			} catch (Exception xx) {
 				printHelp(options,xx.getMessage());
 			}
@@ -466,7 +467,9 @@ public class aacli {
 			}
 			@Override
 			public String getDefaultValue() {
+				try {
 				return AAServicesConfig.getSingleton().getConfig(CONFIG.opensso);
+				} catch (Exception x) {return null;}
 			}
 		},
 		authz {
@@ -484,7 +487,9 @@ public class aacli {
 			}
 			@Override
 			public String getDefaultValue() {
+				try {
 				return AAServicesConfig.getSingleton().getConfig(CONFIG.policy);
+				} catch (Exception x) {return null;}
 			}
 		},		
 		user {

@@ -1,7 +1,8 @@
 package org.opentox.aa.exception;
 
-import org.restlet.data.Status;
-import org.restlet.resource.ResourceException;
+import java.net.HttpURLConnection;
+
+import org.opentox.rest.RestException;
 
 public class AATokenValidationException extends AAException {
 
@@ -9,10 +10,10 @@ public class AATokenValidationException extends AAException {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public AATokenValidationException(String ref, ResourceException x) {
+	public AATokenValidationException(String ref, RestException x) {
 		super(x.getStatus(),ref,x);
 	}
 	public AATokenValidationException(String ref, Exception x) {
-		super(Status.SERVER_ERROR_BAD_GATEWAY,ref,x);
+		super(HttpURLConnection.HTTP_BAD_GATEWAY,ref,x);
 	}
 }

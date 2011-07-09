@@ -12,13 +12,8 @@ import org.opentox.aa.OTAAParams;
 import org.opentox.aa.OpenToxPolicy;
 import org.opentox.aa.policy.IPolicyHandler;
 import org.opentox.aa.policy.PolicyHandler;
-import org.restlet.data.Form;
-import org.restlet.data.MediaType;
-import org.restlet.data.Status;
-import org.restlet.representation.Representation;
-import org.restlet.representation.StringRepresentation;
-import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
+import org.opentox.rest.HTTPClient;
+import org.opentox.rest.RestException;
 
 public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 	protected static final String headers_tag = "org.restlet.http.headers";
@@ -135,30 +130,24 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 	protected int sendPolicy(OpenSSOToken token,String xml) throws Exception {
 
 		
-		Representation r = new StringRepresentation(xml,MediaType.APPLICATION_XML);
 		System.out.println(xml);
-		ClientResource client = new ClientResource(policyService);
+		HTTPClient client = new HTTPClient(policyService);
 		
-		Form headers = new Form();  
-		client.getRequest().getAttributes().put(headers_tag, headers);  
-		headers.add(OTAAParams.subjectid.toString(), token.getToken());
+		client.setHeaders(new String[][] {{OTAAParams.subjectid.toString(), token.getToken()}});
 		
-		Representation response = null;
 		try {
 			
-			response = client.post(r);
-			return client.getStatus().getCode();
+			client.post(xml,"application/xml");
+			return client.getStatus();
 			
-		} catch (ResourceException x) {
+		} catch (RestException x) {
 			x.printStackTrace();
-			throw new ResourceException(x.getStatus(),String.format("Error querying policy service %s %d %s",
-					policyService,x.getStatus().getCode(), x.getMessage()),
+			throw new RestException(x.getStatus(),String.format("Error querying policy service %s %d %s",
+					policyService,x.getStatus(), x.getMessage()),
 					x);			
 		} catch (Exception x) {
 			throw new Exception(String.format("Error querying policy service %s %s",policyService,x.getMessage()),x);
 		} finally {
-			try {response.release(); } catch (Exception x) {}
-			try {r.release(); } catch (Exception x) {}
 			try {client.release(); } catch (Exception x) {}
 		}
 		
@@ -169,26 +158,27 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		if ((token==null) || (token.getToken()==null)) throw new Exception(OpenSSOToken.MSG_EMPTY_TOKEN,null);
 		if (policyId==null) throw new Exception(MSG_EMPTY_POLICYID,null);
 		if (!token.isTokenValid()) throw new Exception("Invalid token",null);
-		Form headers = new Form();  
-		headers.add(OTAAParams.subjectid.toString(), token.getToken());
-		headers.add(OTAAParams.id.toString(), policyId);
 		
-		Representation response = null;
-		ClientResource client = new ClientResource(policyService);
+		
+		String[][] headers = new String[][] {  
+		{OTAAParams.subjectid.toString(), token.getToken()},
+		{OTAAParams.id.toString(), policyId}
+		};
+		
+		HTTPClient client = new HTTPClient(policyService);
 		try {
-			client.getRequest().getAttributes().put(headers_tag, headers);  
-			response = client.delete();
+			client.setHeaders(headers);  
+			client.delete();
 			
-			return client.getStatus().getCode();
+			return client.getStatus();
 			
-		} catch (ResourceException x) {
-			throw new ResourceException(x.getStatus(),String.format("Error querying policy service %s %d %s",
-					policyService,x.getStatus().getCode(), x.getMessage()),
+		} catch (RestException x) {
+			throw new RestException(x.getStatus(),String.format("Error querying policy service %s %d %s",
+					policyService,x.getStatus(), x.getMessage()),
 					x);			
 		} catch (Exception x) {
 			throw new Exception(String.format("Error querying policy service %s %s",policyService,x.getMessage()),x);
 		} finally {
-			try {response.release(); } catch (Exception x) {}
 		//	try {r.release(); } catch (Exception x) {}
 			try {client.release(); } catch (Exception x) {}
 		}		
@@ -225,21 +215,20 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		
 		if (!token.isTokenValid()) throw new Exception("Invalid token",null);
 			
-		Form headers = new Form();  
-		headers.add(OTAAParams.subjectid.toString(), token.getToken());
-		headers.add(OTAAParams.uri.toString(), uri);
-		headers.add(OTAAParams.polnames.toString(), Boolean.toString(handler!=null));
+		String[][] headers = new String[][] {  
+		{OTAAParams.subjectid.toString(), token.getToken()},
+		{OTAAParams.uri.toString(), uri},
+		{OTAAParams.polnames.toString(), Boolean.toString(handler!=null)}
+		};
 		
 		
-		
-		Representation response = null;
-		ClientResource client = new ClientResource(policyService);
+		HTTPClient client = new HTTPClient(policyService);
 		try {
-			client.getRequest().getAttributes().put(headers_tag, headers);  
-			response = client.get();
+			client.setHeaders(headers);  
+			client.get();
 			
-			if (Status.SUCCESS_OK.equals(client.getStatus())) {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(response.getStream()));
+			if (HttpURLConnection.HTTP_OK == client.getStatus()) {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 				int count = 0;
 				String line = null;
 				while ((line = reader.readLine())!=null) {
@@ -255,16 +244,14 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 					count++;
 				}
 			} 
-			return client.getStatus().getCode();
-		} catch (ResourceException x) {
-			throw new ResourceException(x.getStatus(),String.format("Error querying policy service %s %d %s",
-					policyService,x.getStatus().getCode(), x.getMessage()),
+			return client.getStatus();
+		} catch (RestException x) {
+			throw new RestException(x.getStatus(),String.format("Error querying policy service %s %d %s",
+					policyService,x.getStatus(), x.getMessage()),
 					x);			
 		} catch (Exception x) {
 			throw new Exception(String.format("Error querying policy service %s %s",policyService,x.getMessage()),x);
 		} finally {
-			try {response.release(); } catch (Exception x) {}
-		//	try {r.release(); } catch (Exception x) {}
 			try {client.release(); } catch (Exception x) {}
 		}	
 	}
@@ -290,18 +277,18 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		if ((token==null) || (token.getToken()==null)) throw new Exception(OpenSSOToken.MSG_EMPTY_TOKEN,null);
 		if (policyId==null) throw new Exception(MSG_EMPTY_POLICYID,null);
 		if (!token.isTokenValid()) throw new Exception("Invalid token",null);
-		Form headers = new Form();  
-		headers.add(OTAAParams.subjectid.toString(), token.getToken());
-		headers.add(OTAAParams.id.toString(), policyId);
-		
-		Representation response = null;
-		ClientResource client = new ClientResource(policyService);
+		String[][] headers = new String[][] {  
+		{OTAAParams.subjectid.toString(), token.getToken()},
+		{OTAAParams.id.toString(), policyId}
+		};
+
+		HTTPClient client = new HTTPClient(policyService);
 		try {
-			client.getRequest().getAttributes().put(headers_tag, headers);  
-			response = client.get();
+			client.setHeaders(headers);  
+			client.get();
 			
-			if (Status.SUCCESS_OK.equals(client.getStatus())) {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(response.getStream()));
+			if (HttpURLConnection.HTTP_OK == client.getStatus()) {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 				String line = null;
 				StringBuffer b = new StringBuffer();
 				while ((line = reader.readLine())!=null) {
@@ -315,18 +302,16 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 				}
 				
 			} 
-			return client.getStatus().getCode();
-		} catch (ResourceException x) {
+			return client.getStatus();
+		} catch (RestException x) {
 			x.printStackTrace();
-			throw new ResourceException(x.getStatus(),
+			throw new RestException(x.getStatus(),
 					String.format("Error querying policy service PolicyID=%s subjectid=%s %s %d %s",
-					policyService,policyId,token.getToken(),x.getStatus().getCode(), x.getMessage()),
+					policyService,policyId,token.getToken(),x.getStatus(), x.getMessage()),
 					x);			
 		} catch (Exception x) {
 			throw new Exception(String.format("Error querying policy service %s %s",policyService,x.getMessage()),x);
 		} finally {
-			try {response.release(); } catch (Exception x) {}
-		//	try {r.release(); } catch (Exception x) {}
 			try {client.release(); } catch (Exception x) {}
 		}		
 	}
@@ -386,9 +371,9 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 				
 			} 
 			return code;
-		} catch (ResourceException x) {
-			throw new ResourceException(x.getStatus(),String.format("Error querying policy service %s %d %s",
-					policyService,x.getStatus().getCode(), x.getMessage()),
+		} catch (RestException x) {
+			throw new RestException(x.getStatus(),String.format("Error querying policy service %s %d %s",
+					policyService,x.getStatus(), x.getMessage()),
 					x);
 		} catch (Exception x) {
 			throw new Exception(String.format("Error querying policy service %s %s",policyService,x.getMessage()),x);

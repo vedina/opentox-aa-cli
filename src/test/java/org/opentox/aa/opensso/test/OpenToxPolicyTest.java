@@ -1,5 +1,6 @@
 package org.opentox.aa.opensso.test;
 
+import java.net.HttpURLConnection;
 import java.util.Hashtable;
 import java.util.UUID;
 
@@ -12,13 +13,11 @@ import org.opentox.aa.OpenToxUser;
 import org.opentox.aa.opensso.AAServicesConfig;
 import org.opentox.aa.opensso.OpenSSOPolicy;
 import org.opentox.aa.opensso.OpenSSOToken;
-import org.opentox.aa.policy.IPolicyHandler;
-import org.restlet.data.Status;
 
 public class OpenToxPolicyTest {
 	protected AAServicesConfig config;
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		config = AAServicesConfig.getSingleton();	
 	}
 	@Test
@@ -44,7 +43,7 @@ public class OpenToxPolicyTest {
 				policy.deletePolicy(token, policyID);
 			} catch (Exception x) {}
 			
-			Assert.assertEquals(Status.SUCCESS_OK.getCode(),
+			Assert.assertEquals(HttpURLConnection.HTTP_OK ,
 					policy.createGroupPolicy("member",token, 
 						uri, 
 						new String[] {"GET","POST"} ,
@@ -54,7 +53,7 @@ public class OpenToxPolicyTest {
 			Hashtable<String,String> policies = new Hashtable<String, String>();
 			
 			//check policies for this URI
-			if (Status.SUCCESS_OK.getCode() == policy.getURIOwner(token, uri, user, policies)) {
+			if (HttpURLConnection.HTTP_OK  == policy.getURIOwner(token, uri, user, policies)) {
 				Assert.assertNotNull(policies.get(policyID));
 			}			
 			/*
@@ -69,7 +68,7 @@ public class OpenToxPolicyTest {
 				Assert.assertTrue(token.authorize(uri, "POST"));
 			} catch (Exception x) {}
 			//clean up
-			//policy.deletePolicy(token, policyID);
+			policy.deletePolicy(token, policyID);
 		} catch (Exception x) {
 			throw x;
 		} finally {
@@ -96,7 +95,7 @@ public class OpenToxPolicyTest {
 				policy.deletePolicy(token, policyID);
 			} catch (Exception x) {}
 			
-			Assert.assertEquals(Status.SUCCESS_OK.getCode(),
+			Assert.assertEquals(HttpURLConnection.HTTP_OK ,
 					policy.createUserPolicy(config.getTestUser(),token, 
 						uri, 
 						new String[] {"GET","POST"} ,
@@ -106,7 +105,7 @@ public class OpenToxPolicyTest {
 			Hashtable<String,String> policies = new Hashtable<String, String>();
 			
 			//check policies for this URI
-			if (Status.SUCCESS_OK.getCode() == policy.getURIOwner(token, uri, user, policies)) {
+			if (HttpURLConnection.HTTP_OK  == policy.getURIOwner(token, uri, user, policies)) {
 				Assert.assertNotNull(policies.get(policyID));
 			}
 			/*
@@ -163,7 +162,7 @@ public class OpenToxPolicyTest {
 		
 			OpenSSOPolicy policy = new OpenSSOPolicy(config.getPolicyService());
 			Hashtable<String,String> policies = new Hashtable<String, String>();
-			if (Status.SUCCESS_OK.getCode() == policy.listPolicies(token,policies)) {
+			if (HttpURLConnection.HTTP_OK  == policy.listPolicies(token,policies)) {
 				System.out.println(policies);
 			}
 			
@@ -187,10 +186,10 @@ public class OpenToxPolicyTest {
 		
 			OpenSSOPolicy policy = new OpenSSOPolicy(config.getPolicyService());
 			Hashtable<String,String> policies = new Hashtable<String, String>();
-			if (Status.SUCCESS_OK.getCode() == policy.listPolicies(token,policies)) {
+			if (HttpURLConnection.HTTP_OK  == policy.listPolicies(token,policies)) {
 				System.out.println(policies);
 			}
-			String deletePolicy = "ninas_evil_policy_1";
+			String deletePolicy = "group_02f224ca-9cdf-469c-8fcd-5eb4e3a0466f";
 			/*
 			Enumeration<String> pol = policies.keys();
 			while (pol.hasMoreElements()) {
@@ -199,8 +198,9 @@ public class OpenToxPolicyTest {
 				break;
 			}
 			*/
+			policy.deletePolicy(token, deletePolicy);
 			Hashtable<String,String> policies1 = new Hashtable<String, String>();
-			if (Status.SUCCESS_OK.getCode() == policy.listPolicies(token,policies1)) {
+			if (HttpURLConnection.HTTP_OK  == policy.listPolicies(token,policies1)) {
 				System.out.println(policies1);
 				Assert.assertFalse(policies1.containsKey(deletePolicy));
 			}
@@ -225,12 +225,15 @@ public class OpenToxPolicyTest {
 			Hashtable<String,String> policies = new Hashtable<String, String>();
 
 			String policyId = "group_9a4ab38c-0dda-47e2-9ffe-f700d0047780";
-			if (Status.SUCCESS_OK.getCode() == policy.listPolicy(token,policyId,policies)) {
+			int c = 0;
+			int code = policy.listPolicy(token,policyId,policies);
+			Assert.assertEquals(HttpURLConnection.HTTP_OK ,code);
+			if (HttpURLConnection.HTTP_OK  == code) {
 				System.out.println(policies.get(policyId));
 				Assert.assertNotNull(policies.get(policyId));
-				
+				c++;
 			}
-		
+			Assert.assertEquals(1,c);
 		} catch (Exception x) {
 			throw x;
 		} finally {
@@ -253,7 +256,7 @@ public class OpenToxPolicyTest {
 			//"https://ambit.uni-plovdiv.bg:8443/ambit2/dataset/63634";
 			
 			IOpenToxUser user = new OpenToxUser();
-			if (Status.SUCCESS_OK.getCode() == policy.getURIOwner(token, uri, user)) {
+			if (HttpURLConnection.HTTP_OK  == policy.getURIOwner(token, uri, user)) {
 				Assert.assertEquals(config.getTestUser(),user.getUsername());
 
 			}
@@ -282,7 +285,7 @@ public class OpenToxPolicyTest {
 			
 			IOpenToxUser user = new OpenToxUser();
 			Hashtable<String,String> policies = new Hashtable<String, String>();
-				if (Status.SUCCESS_OK.getCode() == policy.getURIOwner(token, uri, user, policies)) {
+				if (HttpURLConnection.HTTP_OK  == policy.getURIOwner(token, uri, user, policies)) {
 					if (policies.size()>0)
 						Assert.assertEquals(config.getTestUser(),user.getUsername());
 

@@ -12,7 +12,7 @@ import org.opentox.aa.opensso.OpenSSOToken;
 public class OpenSSOTokenTest {
 	protected AAServicesConfig config;
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		config = AAServicesConfig.getSingleton();	
 	}
 	@Test

@@ -67,8 +67,7 @@ public class AAServicesConfig {
 		InputStream in = getClass().getClassLoader().getResourceAsStream("org/opentox/aa/config/config.prop");
 		try {
 			properties.load(in);
-		} catch (AAException x) {
-			throw x;
+
 		} catch (Exception x) {
 			throw new AAPropertiesException(x);
 		} finally {

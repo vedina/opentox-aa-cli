@@ -217,12 +217,6 @@
 </licenses>
     <dependencies>
     <!--  TODO: refactor the code to use Java HTTPUrlConnection , remove restlet dependency -->
-        <dependency>
-    		<groupId>org.restlet.jee</groupId>
-	    	<artifactId>org.restlet</artifactId>
-	    	<version>${restlet.version}</version>
-	    	<scope>compile</scope>
-    	</dependency>
     
   	<dependency> 	<!--  for the command line only  --> 
   		<groupId>commons-cli</groupId>
@@ -416,6 +410,5 @@
 </profiles>
 <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<restlet.version>2.0-M6</restlet.version>
 	</properties>	
 </project>
