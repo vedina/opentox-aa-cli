@@ -1,4 +1,4 @@
-package org.opentox.aa.opensso;
+package org.opentox.aa.cli;
 
 import java.io.BufferedReader;
 import java.io.Console;
@@ -19,7 +19,10 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
 import org.opentox.aa.IOpenToxUser;
 import org.opentox.aa.OpenToxUser;
+import org.opentox.aa.opensso.AAServicesConfig;
 import org.opentox.aa.opensso.AAServicesConfig.CONFIG;
+import org.opentox.aa.opensso.OpenSSOPolicy;
+import org.opentox.aa.opensso.OpenSSOToken;
 import org.opentox.aa.policy.IPolicyHandler;
 import org.opentox.aa.policy.PolicyArchiveHandler;
 import org.opentox.aa.policy.PolicyHandler;
@@ -46,10 +49,10 @@ public class aacli {
 	public aacli() throws Exception {
 		super();
 		user = new OpenToxUser();
-		authService = AAServicesConfig.getSingleton().getConfig(CONFIG.opensso);
-		policyService = AAServicesConfig.getSingleton().getConfig(CONFIG.policy);
-		user.setUserName(AAServicesConfig.getSingleton().getConfig(CONFIG.user));
-		user.setPassword(AAServicesConfig.getSingleton().getConfig(CONFIG.pass));
+		authService = AAServicesConfig.getSingleton().getOpenSSOService();
+		policyService = AAServicesConfig.getSingleton().getPolicyService();
+		user.setUserName(AAServicesConfig.getSingleton().getTestUser());
+		user.setPassword(AAServicesConfig.getSingleton().getTestUserPass());
 		LOGGER.setLevel(Level.OFF);
 	}
 	
@@ -468,7 +471,7 @@ public class aacli {
 			@Override
 			public String getDefaultValue() {
 				try {
-				return AAServicesConfig.getSingleton().getConfig(CONFIG.opensso);
+				return AAServicesConfig.getSingleton().getOpenSSOService();
 				} catch (Exception x) {return null;}
 			}
 		},
@@ -488,7 +491,7 @@ public class aacli {
 			@Override
 			public String getDefaultValue() {
 				try {
-				return AAServicesConfig.getSingleton().getConfig(CONFIG.policy);
+				return AAServicesConfig.getSingleton().getPolicyService();
 				} catch (Exception x) {return null;}
 			}
 		},		
@@ -643,6 +646,13 @@ public class aacli {
 			public String getDefaultValue() {
 				return null;
 			}
+			public Option createOption() {
+		    	Option option   = OptionBuilder.withLongOpt(name())
+		        .withDescription(getDescription())
+		        .create(getShortName());
+
+		    	return option;
+			}
 		}				
 		;
 		public abstract String getArgName();
@@ -657,6 +667,7 @@ public class aacli {
 	        .withArgName(getArgName())
 	        .withDescription(String.format("%s %s %s",getDescription(),defaultValue==null?"":"Default value: ",defaultValue==null?"":defaultValue))
 	        .create(getShortName());
+
 	    	return option;
 		}
 	}

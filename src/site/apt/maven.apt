@@ -1,0 +1,51 @@
+ -----
+ OpenTox Authentication and Authorization library
+ -----
+ Background
+ -----
+ July 2011
+
+OpenTox AA client
+~~~~~~~  
+  A java client library and a command line tool for accessing OpenTox authentication and authorization services.
+  
+    
+* Use as a Java library 
+	
+** As Maven dependency
+
+---------------------------------------
+
+	<dependency>
+	  <groupId>ambit</groupId>
+	  <artifactId>opentox-opensso</artifactId>
+	  <version>1.0.0-SNAPSHOT</version>
+	</dependency>
+	
+----------------------------------------
+	
+** Maven Repositories:
+
+  {{{http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases/ambit/opentox-opensso}Releases}}
+  
+----------------------------------------
+    <repository>
+        <id>ambit-plovdiv-releases</id>
+        <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
+        <snapshots>
+  	<enabled>false</enabled>
+         </snapshots>
+    </repository>
+----------------------------------------  
+
+  {{{http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots/ambit/opentox-opensso}Snapshots}}
+  
+----------------------------------------  
+    <repository>
+        <id>ambit-plovdiv-snapshots</id>
+        <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
+        <snapshots>
+               <enabled>true</enabled>
+        </snapshots>
+    </repository>
+----------------------------------------

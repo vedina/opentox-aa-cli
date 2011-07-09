@@ -1,0 +1,16 @@
+ -----
+ OpenTox Authentication and Authorization library
+ -----
+ Background
+ -----
+ July 2011
+
+OpenTox AA client
+~~~~~~~  
+  A java client library and a command line tool for accessing OpenTox authentication and authorization services.
+  
+   * Use as  {{{/maven.html}Maven dependency}}.
+   
+   * Use as  {{{/cli.html}command line tool}}.
+   
+   * Download from the {{{http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;quick~opentox-opensso}Maven repository}}

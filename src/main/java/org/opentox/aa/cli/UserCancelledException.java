@@ -1,4 +1,4 @@
-package org.opentox.aa.opensso;
+package org.opentox.aa.cli;
 
 public class UserCancelledException extends Exception {
 

@@ -4,11 +4,13 @@
   <artifactId>opentox-opensso</artifactId>
   <name>OpenTox AA</name>
   <version>1.0.0-SNAPSHOT</version>
-  <description>OpenTox Authorization and Authentication client library</description>
+  <description>OpenTox Authorization and Authentication client library in Java.
+
+</description>
   <scm>
   	<connection>scm:git:https://vedina@github.com/vedina/opentox-aa-cli.git</connection>
   	<developerConnection>scm:git:git@github.com:vedina/opentox-aa-cli.git</developerConnection>
-  	<url>scm:git:git@github.com:vedina/opentox-aa-cli.git</url>
+  	<url>https://vedina.@github.com/vedina/opentox-aa-cli</url>
   </scm>
   <organization>
   	<name>Ideaconsult </name>

@@ -127,7 +127,7 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 		
 	}	
 	
-	protected int sendPolicy(OpenSSOToken token,String xml) throws Exception {
+	public int sendPolicy(OpenSSOToken token,String xml) throws Exception {
 
 		
 		System.out.println(xml);

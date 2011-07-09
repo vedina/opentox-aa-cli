@@ -1,7 +1,7 @@
 package org.opentox.aa.opensso.test;
 
 import org.junit.Test;
-import org.opentox.aa.opensso.aacli;
+import org.opentox.aa.cli.aacli;
 
 public class aacliTest {
 	@Test
