@@ -132,7 +132,7 @@ public class aacli {
 		
 		switch (command) {
 		case authorize: {
-			if (uri==null) throw new Exception("Empty URI");
+			if (uri==null) throw new MissingParameterException(String.format("%s>",command,"Missing URI. Have you specified an argument to the -r option?"));
 			log(command,String.format("URI: %s",uri));
 			String[] mm = new String[] {"GET","POST","PUT","DELETE"};
 			for (String m : mm)
@@ -262,7 +262,7 @@ public class aacli {
 		case create: {
 			
 			File dir = new File(backupDir);
-			if (!dir.exists()) throw new Exception(String.format("Directory %s does not exist!", dir.getAbsoluteFile()));
+			if (!dir.exists()) throw new MissingParameterException(String.format("Directory %s does not exist!", dir.getAbsoluteFile()));
 			
 			File serversFile = new File(backupDir,"servers.txt");
 			BufferedReader reader = null;
@@ -318,7 +318,7 @@ public class aacli {
 			break;
 
 		}
-		default : throw new Exception(String.format("%s not supported",command));
+		default : throw new MissingParameterException(String.format("%s not supported",command));
 		}
 		return 0;
 	}
@@ -431,6 +431,8 @@ public class aacli {
 		    	printHelp(options,null);
 		    }		
 		       */    
+		} catch (MissingParameterException x) {
+			System.out.println(x.getMessage());
 		} catch (InvalidCredentials x) {
 			System.out.println(x.getMessage());
 		} catch (UserCancelledException x) {
