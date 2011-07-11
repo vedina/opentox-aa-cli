@@ -18,7 +18,7 @@ OpenTox AA client
 	An OpenTox Authentication and Authorization client.
 	usage: org.opentox.aa.opensso.aacli
 	 -b,--backupdir <Directory>     Directory to archive policy XML files
-	                                Default value:  C:\Users\nina\AppData\Local\Temp\
+	                                Default value:  [the user temp directory]
 	 -c,--command <the command>     The command to be performed. One of
 	                                authorize|list|delete|create|archive Default value:  authorize
 	 -h,--help                      OpenTox Authentication and Authorization
