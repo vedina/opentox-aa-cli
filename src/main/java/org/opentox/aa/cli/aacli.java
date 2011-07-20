@@ -11,6 +11,13 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -21,7 +28,6 @@ import org.apache.commons.cli.PosixParser;
 import org.opentox.aa.IOpenToxUser;
 import org.opentox.aa.OpenToxUser;
 import org.opentox.aa.opensso.AAServicesConfig;
-import org.opentox.aa.opensso.AAServicesConfig.CONFIG;
 import org.opentox.aa.opensso.OpenSSOPolicy;
 import org.opentox.aa.opensso.OpenSSOToken;
 import org.opentox.aa.policy.IPolicyHandler;
@@ -29,6 +35,7 @@ import org.opentox.aa.policy.PolicyArchiveHandler;
 import org.opentox.aa.policy.PolicyHandler;
 
 public class aacli {
+	protected boolean insecure = false;
 	protected String authService;
 	protected String policyService;
 	protected OpenSSOToken ssotoken;
@@ -397,8 +404,49 @@ public class aacli {
 				max = -1;
 			}
 		}
+		case insecure: {
+			try {
+				insecure = true;
+
+
+			} catch (Exception x) {
+				insecure = false;
+			}
+		}
 		default: 
 		}
+	}
+	
+	protected void insecureConfig() throws Exception {
+		if (!insecure)  return;
+		// Create a trust manager that does not validate certificate chains
+		TrustManager[] trustAllCerts = new TrustManager[]{
+		    new X509TrustManager() {
+		        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+		            return null;
+		        }
+		        public void checkClientTrusted(
+		            java.security.cert.X509Certificate[] certs, String authType) {
+		        }
+		        public void checkServerTrusted(
+		            java.security.cert.X509Certificate[] certs, String authType) {
+		        }
+		    }
+		};
+
+		// Install the all-trusting trust manager
+		try {
+		    SSLContext sc = SSLContext.getInstance("SSL");
+		    sc.init(null, trustAllCerts, new java.security.SecureRandom());
+		    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+		} catch (Exception e) {
+		}
+		HttpsURLConnection.setDefaultHostnameVerifier( 
+				new HostnameVerifier(){
+					public boolean verify(String string,SSLSession ssls) {
+						return true;
+					}
+				});
 	}
 	public static void main(String[] args) {
 
@@ -421,6 +469,8 @@ public class aacli {
 	    			printHelp(options,x.getMessage());
 	    			return;
 	    		}
+	    		
+	    	cli.insecureConfig();	
 	    	
 	    	cli.login();	
 	    	cli.run();	
@@ -635,6 +685,35 @@ public class aacli {
 				return "all";
 			}			
 		},		
+		insecure {
+
+			@Override
+			public String getArgName() {
+				return null;
+			}
+
+			@Override
+			public String getDescription() {
+				return "Allow connections to SSL sites without certs";
+			}
+
+			@Override
+			public String getShortName() {
+				return "k";
+			}
+			@Override
+			public String getDefaultValue() {
+				return null;
+			}
+			public Option createOption() {
+		    	Option option   = OptionBuilder.withLongOpt(name())
+		        .withDescription(getDescription())
+		        .create(getShortName());
+
+		    	return option;
+			}
+			
+		},
 		help {
 			@Override
 			public String getArgName() {
