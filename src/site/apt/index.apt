@@ -21,3 +21,20 @@ OpenTox AA client
    
    * View source at {{{https://github.com/vedina/opentox-aa-cli}GitHub}}
    
+*Releases
+~~~~~~~ 
+
+** aacli-1.0.1 ,  Released: July 21, 2011
+ 	
+*** Changelog
+	
+    * added -k / --insecure option to skip the certificate check
+    
+    * default values for -n and -z options changed
+ 
+** aacli-1.0.0 , Released:  July 9, 2011
+   
+*** Changelog
+   
+	* first version
+   
