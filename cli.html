@@ -151,7 +151,7 @@
   
     
             <div id="lastPublished">
-        Last Published: 07-09-11
+        Last Published: 07-21-11
               </div>
             </div>
     </div>
@@ -159,86 +159,98 @@
       <div id="contentBox">
         <div class="section"><h2>OpenTox AA client</h2>
 <p>A java client library and a command line tool for accessing <a href="http://opentox.org" class="externalLink">OpenTox</a> <a href="http://opentox.org/dev/apis/api-1.2/AA" class="externalLink">authentication and authorization</a> services.</p>
-<ul><li>Command line client <a href="https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.0.jar" class="externalLink">Download</a><div class="source"><pre>        &gt;java jar aacli-1.0.0.jar
+<ul><li>Command line client <a href="https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.1.jar" class="externalLink">Download</a><div class="source"><pre>        &gt;java -jar aacli-1.0.0.jar
         
         An OpenTox Authentication and Authorization client.
         usage: org.opentox.aa.opensso.aacli
          -b,--backupdir &lt;Directory&gt;     Directory to archive policy XML files
-                                        Default value:  C:\Users\nina\AppData\Local\Temp\
+                                        Default value:  [the user temp directory]
          -c,--command &lt;the command&gt;     The command to be performed. One of
                                         authorize|list|delete|create|archive Default value:  authorize
          -h,--help                      OpenTox Authentication and Authorization
                                         client
          -i,--policyid &lt;policyid&gt;       An OpenSSO/OpenAM policy identifier
+         -k,--insecure                  Allow connections to SSL sites without
+                                    certs
          -m,--max &lt;number of records&gt;   Max number of records Default value:  all
-         -n,--authn &lt;URI&gt;               URI of OpenSSO/OpenAM service Default
-                                        value:  http://pirin.uni-plovdiv.bg:8080/opensso/identity
+         -n,--authn &lt;URI&gt;               URI of OpenSSO/OpenAM service. Default value:  
+                                                                        http://opensso.in-silico.ch/opensso/identity
          -p,--password &lt;password&gt;       OpenTox user password
          -r,--uri &lt;URI&gt;                 URI of an OpenTox resource
          -s,--subjectid &lt;token&gt;         OpenSSO/OpenAM token. If the token is
                                         present, user and password are ignored.
          -u,--user &lt;username&gt;           OpenTox user name
-         -z,--authz &lt;URI&gt;               URI of OpenTox policy service Default
-                                        value:  http://pirin.uni-plovdiv.bg:8080/Pol/opensso-pol
-        Examples:
-        Verify authorization:
-                java -jar aacli
-                -n http://opensso.in-silico.ch/opensso/identity
-                -z http://opensso.in-silico.ch/Pol/opensso-pol
-                -u guest
-                -p guest
-                -r https://ambit.uni-plovdiv.bg:8443/ambit2/dataset/1
-                -c authorize
-        Retrieve all policies per URI:
-                java -jar aacli
-                -n http://opensso.in-silico.ch/opensso/identity
-                -z http://opensso.in-silico.ch/Pol/opensso-pol
-                -u guest
-                -p guest
-                -r http://blabla.uni-plovdiv.bg:8080/ambit2/dataset/999
-                -c list
-        Retrieve policy content by policy id
-                java -jar aacli
-                -n http://opensso.in-silico.ch/opensso/identity
-                -z http://opensso.in-silico.ch/Pol/opensso-pol
-                -u guest
-                -p guest
-                -i member_rohttpsambit.uni-plovdiv.bg8443ambit2dataset1
-                -c list
-        Retriewe and store locally XML files for the user:
-                java -jar aacli
-                -n http://opensso.in-silico.ch/opensso/identity
-                -z http://opensso.in-silico.ch/Pol/opensso-pol
-                -u guest
-                -p guest
-                -b /tmp
-                -c archive
-        Create new policies from a backup directory of XML files:
-                java -jar aacli
-                -n your-sso-server
-                -z your-policy-server
-                -u your-user
-                -p your-pass
-                -b /tmp
-                -c create
-        Delete policy by policy id:
-                java -jar aacli
-                -u guest
-                -p guest
-                -i guest_c35ceda9-e548-47d6-a377-ac2cae708100
-                -c delete
-        Delete all policies per URI:
-                java -jar aacli
-                -u guest
-                -p guest
-                -r http://blabla.uni-plovdiv.bg:8080/ambit2/dataset/999
-                -c delete
-        Delete all policies per user:
-                java -jar aacli
-                -u guest
-                -p guest
-                -c delete
-                </pre>
+         -z,--authz &lt;URI&gt;               URI of OpenTox policy service.  Default value:  
+                                                                        http://opensso.in-silico.ch/Pol/opensso-pol
+ 
+ Examples:
+ 
+ Verify authorization:
+        java -jar aacli
+        -n http://opensso.in-silico.ch/opensso/identity
+        -z http://opensso.in-silico.ch/Pol/opensso-pol
+        -u guest
+        -p guest
+        -r https://ambit.uni-plovdiv.bg:8443/ambit2/dataset/1
+        -c authorize
+ 
+ Retrieve all policies per URI:
+        java -jar aacli
+        -n http://opensso.in-silico.ch/opensso/identity
+        -z http://opensso.in-silico.ch/Pol/opensso-pol
+        -u guest
+        -p guest
+        -r http://blabla.uni-plovdiv.bg:8080/ambit2/dataset/999
+        -c list
+
+ Retrieve policy content by policy id
+        java -jar aacli
+        -n http://opensso.in-silico.ch/opensso/identity
+        -z http://opensso.in-silico.ch/Pol/opensso-pol
+        -u guest
+        -p guest
+        -i member_rohttpsambit.uni-plovdiv.bg8443ambit2dataset1
+        -c list
+
+ Retriewe and store locally XML files for the user:
+        java -jar aacli
+        -n http://opensso.in-silico.ch/opensso/identity
+        -z http://opensso.in-silico.ch/Pol/opensso-pol
+        -u guest
+        -p guest
+        -b /tmp
+        -c archive
+
+ Create new policies from a backup directory of XML files:
+        java -jar aacli
+        -n your-sso-server
+        -z your-policy-server
+        -u your-user
+        -p your-pass
+        -b /tmp
+        -c create
+
+ Delete policy by policy id:
+        java -jar aacli
+        -u guest
+        -p guest
+        -i guest_c35ceda9-e548-47d6-a377-ac2cae708100
+        -c delete
+ 
+ Delete all policies per URI:
+        java -jar aacli
+        -u guest
+        -p guest
+        -r http://blabla.uni-plovdiv.bg:8080/ambit2/dataset/999
+        -c delete
+
+ Delete all policies per user:
+        java -jar aacli
+        -u guest
+        -p guest
+        -c delete
+
+</pre>
 </div>
 </li>
 </ul>

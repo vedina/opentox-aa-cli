@@ -13,6 +13,7 @@ digraph G {
 			<tr><td> aacli </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+			<tr><td align="left"> # insecure : boolean </td></tr>
 			<tr><td align="left"> # authService : String </td></tr>
 			<tr><td align="left"> # policyService : String </td></tr>
 			<tr><td align="left"> # ssotoken : OpenSSOToken </td></tr>
@@ -32,6 +33,7 @@ digraph G {
 			<tr><td align="left"> + run() : int </td></tr>
 			<tr><td align="left"> # confirm(message : String) : boolean </td></tr>
 			<tr><td align="left"> + setOption(option : aacli._option, argument : String) </td></tr>
+			<tr><td align="left"> # insecureConfig() </td></tr>
 			<tr><td align="left"> + main(args : String[]) </td></tr>
 			<tr><td align="left"> # createOptions() : Options </td></tr>
 			<tr><td align="left"> # exampleRetrievePoliciesPerURI() : String </td></tr>
