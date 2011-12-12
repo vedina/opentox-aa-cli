@@ -411,6 +411,30 @@
 			</plugins>
 		</build>
 	</profile>
+	<profile>
+	 <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+		<id>aa-enabled</id>
+		<properties>
+		<aa.opensso>http://opensso.in-silico.ch/opensso/identity</aa.opensso>
+        <aa.policy>http://opensso.in-silico.ch/Pol/opensso-pol</aa.policy>
+        <aa.user>guest</aa.user>
+        <aa.pass>guest</aa.pass>
+		</properties>
+	</profile>	
+		<profile>
+	 <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+		<id>aa-local</id>
+		<properties>
+		<aa.opensso>http://pirin.uni-plovdiv.bg/opensso/identity</aa.opensso>
+        <aa.policy>http://pirin.uni-plovdiv.bg/Pol/opensso-pol</aa.policy>
+        <aa.user>guest</aa.user>
+        <aa.pass>guest</aa.pass>
+		</properties>
+	</profile>
 </profiles>
 <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
