@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -14,11 +15,11 @@ public class HTTPClient {
 	protected String[][] headers;
 	protected String targetURL;
 	protected HttpURLConnection connection;
-	protected static final String POST = "POST";
-	protected static final String GET = "GET";
-	protected static final String DELETE = "DELETE";
-	protected static final String PUT = "PUT";
-	protected static final String mime_wwwform = "application/x-www-form-urlencoded";
+	public static final String POST = "POST";
+	public static final String GET = "GET";
+	public static final String DELETE = "DELETE";
+	public static final String PUT = "PUT";
+	public static final String mime_wwwform = "application/x-www-form-urlencoded";
 	
 	public HTTPClient(String uri) {
 		super();
@@ -28,17 +29,20 @@ public class HTTPClient {
 		postWWWForm(targetURL, form);
 	}
 	protected void postWWWForm(String targetURL, String[][] form) throws RestException , UnsupportedEncodingException {
+		
+		post(targetURL, getForm(form),mime_wwwform);
+	}
+	public static String getForm(String[][] form) throws RestException,UnsupportedEncodingException {
 		StringBuilder urlParameters = new StringBuilder();
 		String delimiter  ="";
 		for (String[] params: form) {
 			if (params.length<2) continue;
 			urlParameters.append(delimiter);
-			urlParameters.append(String.format("%s=%s",params[0], URLEncoder.encode(params[1], "UTF-8")));
+			urlParameters.append(String.format("%s=%s",params[0], params[1]==null?"":URLEncoder.encode(params[1], "UTF-8")));
 			delimiter = "&";
 		}
-		post(targetURL, urlParameters.toString(),mime_wwwform);
+		return urlParameters.toString();
 	}
-	
 	public int getStatus() throws IOException {
 		return connection==null?-1:connection.getResponseCode();
 	}
@@ -64,6 +68,9 @@ public class HTTPClient {
 	      return response.toString();
 
 	}
+	public void put(String body, String mime) throws RestException {
+		put(targetURL,body,mime);
+	}	
 	public void post(String body, String mime) throws RestException {
 		post(targetURL,body,mime);
 	}
@@ -87,6 +94,9 @@ public class HTTPClient {
 	 * @throws Exception
 	 */
 	protected void send(String method, String targetURL, String body, String mime) throws RestException {
+		send(method, targetURL, body, mime, "UTF-8");
+	}
+	protected void send(String method, String targetURL, String body, String mime,String charset) throws RestException {
 
 	    URL url;
 	    if (connection !=null) try { connection.disconnect();} catch (Exception x) {} 
@@ -100,9 +110,10 @@ public class HTTPClient {
 	      connection = (HttpURLConnection)url.openConnection();
 	      connection.setRequestMethod(method);
 
-	      if (mime != null)
-	    	  connection.setRequestProperty("Content-Type",mime);
-	      
+	      if (mime != null) {
+	    	  String contentType = String.format("%s%s%s",mime,charset==null?"":";charset=",charset==null?"":charset); 
+	    	  connection.setRequestProperty("Content-Type",contentType);
+	      } 
 		  if (body!=null)	
 			  connection.setRequestProperty("Content-Length", "" +  Integer.toString(body.getBytes().length));
 	     // connection.setRequestProperty("Content-Language", "en-US");  
@@ -151,4 +162,22 @@ public class HTTPClient {
 		}
 		connection = null;
 	}
+	
+	public static synchronized HttpURLConnection getHttpURLConnection(String uri, String method, String mediaType) throws IOException, MalformedURLException {
+    	URL url = null;
+    	
+    	try {
+    		url = new URL(uri);
+    	} catch (MalformedURLException x) {
+    		throw x;
+    	}		
+    	HttpURLConnection uc = (HttpURLConnection) url.openConnection();
+		uc.addRequestProperty("Accept",mediaType);
+		uc.setDoOutput(true);
+		uc.setRequestMethod(method);    	
+		//IAuthToken tokenFactory = ClientResourceWrapper.getTokenFactory();
+		//String token = tokenFactory==null?null:tokenFactory.getToken();
+		//if (token!=null) uc.addRequestProperty("subjectid", token);
+		return uc;
+	}	
 }
