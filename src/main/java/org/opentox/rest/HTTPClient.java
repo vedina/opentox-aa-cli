@@ -2,9 +2,12 @@ package org.opentox.rest;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -180,4 +183,28 @@ public class HTTPClient {
 		//if (token!=null) uc.addRequestProperty("subjectid", token);
 		return uc;
 	}	
+	
+	public static void download(InputStream in, File file) throws IOException  {
+		File dir = file.getParentFile();
+		if ((dir!=null) && !dir.exists())	dir.mkdirs();		
+    	FileOutputStream out = new FileOutputStream(file);		
+    	try {
+			download(in, out);
+    	} catch (IOException x) {
+    		throw new IOException(x.getMessage());
+    	} finally {
+			out.close();
+    	}
+    }
+	
+	public static void download(InputStream in, OutputStream out) throws IOException {
+		byte[] bytes = new byte[512];
+		int len;
+		long count = 0;
+		while ((len = in.read(bytes, 0, bytes.length)) != -1) {
+			out.write(bytes, 0, len);
+			count += len;
+		}
+		out.flush();
+}		
 }
