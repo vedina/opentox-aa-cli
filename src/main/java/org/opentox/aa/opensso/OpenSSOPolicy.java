@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Hashtable;
+import java.util.UUID;
 
 import org.opentox.aa.IOpenToxUser;
 import org.opentox.aa.OTAAParams;
@@ -66,7 +67,38 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 	public OpenSSOPolicy(String policyService) {
 		super(policyService);
 	}
+	/**
+	 * Generates XML; doesn't send the policy
+	 * @param groupName
+	 * @param uri
+	 * @param methods
+	 * @return XML
+	 * @throws Exception
+	 */
+	public String createGroupPolicyXML(String groupName, URL uri, String[] methods) throws Exception {
 
+		StringBuffer actions = new StringBuffer();
+		for (String method: methods) {
+			actions.append(String.format(policyActionTemplate,method));
+		}
+		return String.format(policyGroupTemplate,UUID.randomUUID(),uri.toExternalForm(),actions,groupName,groupName);
+	}
+	/**
+	 * Generates XML; doesn't send the policy
+	 * @param userName
+	 * @param uri
+	 * @param methods
+	 * @return XML
+	 * @throws Exception
+	 */
+	public String createUserPolicyXML(String userName, URL uri, String[] methods) throws Exception {
+		
+		StringBuffer actions = new StringBuffer();
+		for (String method: methods) {
+			actions.append(String.format(policyActionTemplate,method));
+		}
+		return String.format(policyUserTemplate,UUID.randomUUID(),uri,actions,userName,userName);
+	}
 
 	@Override
 	public int createGroupPolicy(String group,OpenSSOToken token, String uri, String[] methods) throws Exception {
