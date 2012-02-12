@@ -8,7 +8,7 @@ digraph G {
 	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	// org.opentox.aa.OpenToxUser
-	c590 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OpenToxUser.html">
+	c678 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OpenToxUser.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> OpenToxUser </td></tr>
 		</table></td></tr>
@@ -25,7 +25,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.IOpenToxUser
-	c593 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./IOpenToxUser.html">
+	c681 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./IOpenToxUser.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> &laquo;interface&raquo; </td></tr>
 			<tr><td> IOpenToxUser </td></tr>
@@ -41,6 +41,6 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	//org.opentox.aa.OpenToxUser implements org.opentox.aa.IOpenToxUser
-	c593:p -> c590:p [dir=back,arrowtail=empty,style=dashed];
+	c681:p -> c678:p [dir=back,arrowtail=empty,style=dashed];
 }
 

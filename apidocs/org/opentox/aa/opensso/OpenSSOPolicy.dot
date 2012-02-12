@@ -8,7 +8,7 @@ digraph G {
 	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	// org.opentox.aa.OpenToxPolicy<Token extends org.opentox.aa.OpenToxToken, PolicyContent>
-	c644 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../OpenToxPolicy.html">
+	c740 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../OpenToxPolicy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td><font face="ariali"> OpenToxPolicy&lt;Token extends OpenToxToken, PolicyContent&gt; </font></td></tr>
 		</table></td></tr>
@@ -32,7 +32,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.opensso.OpenSSOPolicy
-	c647 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OpenSSOPolicy.html">
+	c743 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OpenSSOPolicy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> OpenSSOPolicy </td></tr>
 		</table></td></tr>
@@ -44,6 +44,8 @@ digraph G {
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td align="left"> + OpenSSOPolicy(policyService : String) </td></tr>
+			<tr><td align="left"> + createGroupPolicyXML(groupName : String, uri : URL, methods : String[]) : String </td></tr>
+			<tr><td align="left"> + createUserPolicyXML(userName : String, uri : URL, methods : String[]) : String </td></tr>
 			<tr><td align="left"> + createGroupPolicy(group : String, token : OpenSSOToken, uri : String, methods : String[]) : int </td></tr>
 			<tr><td align="left"> + createGroupPolicy(group : String, token : OpenSSOToken, uri : String, methods : String[], policyId : String) : int </td></tr>
 			<tr><td align="left"> + createUserPolicy(user : String, token : OpenSSOToken, uri : String, methods : String[]) : int </td></tr>
@@ -60,6 +62,6 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	//org.opentox.aa.opensso.OpenSSOPolicy extends org.opentox.aa.OpenToxPolicy<org.opentox.aa.opensso.OpenSSOToken, java.lang.String>
-	c644:p -> c647:p [dir=back,arrowtail=empty];
+	c740:p -> c743:p [dir=back,arrowtail=empty];
 }
 

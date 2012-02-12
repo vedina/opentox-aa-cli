@@ -8,7 +8,7 @@ digraph G {
 	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	// org.opentox.aa.opensso.OpenSSOToken
-	c94 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OpenSSOToken.html">
+	c106 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OpenSSOToken.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> OpenSSOToken </td></tr>
 		</table></td></tr>
@@ -32,7 +32,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.opensso.OpenSSOPolicy
-	c95 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OpenSSOPolicy.html">
+	c107 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OpenSSOPolicy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> OpenSSOPolicy </td></tr>
 		</table></td></tr>
@@ -44,6 +44,8 @@ digraph G {
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td align="left"> + OpenSSOPolicy(policyService : String) </td></tr>
+			<tr><td align="left"> + createGroupPolicyXML(groupName : String, uri : URL, methods : String[]) : String </td></tr>
+			<tr><td align="left"> + createUserPolicyXML(userName : String, uri : URL, methods : String[]) : String </td></tr>
 			<tr><td align="left"> + createGroupPolicy(group : String, token : OpenSSOToken, uri : String, methods : String[]) : int </td></tr>
 			<tr><td align="left"> + createGroupPolicy(group : String, token : OpenSSOToken, uri : String, methods : String[], policyId : String) : int </td></tr>
 			<tr><td align="left"> + createUserPolicy(user : String, token : OpenSSOToken, uri : String, methods : String[]) : int </td></tr>
@@ -60,7 +62,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.opensso.AAServicesConfig
-	c96 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAServicesConfig.html">
+	c108 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAServicesConfig.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AAServicesConfig </td></tr>
 		</table></td></tr>
@@ -78,7 +80,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.opensso.AAServicesConfig.CONFIG
-	c97 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAServicesConfig.CONFIG.html">
+	c109 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAServicesConfig.CONFIG.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> &laquo;enumeration&raquo; </td></tr>
 			<tr><td> CONFIG </td></tr>

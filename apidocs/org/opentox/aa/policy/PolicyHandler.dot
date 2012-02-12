@@ -8,7 +8,7 @@ digraph G {
 	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	// org.opentox.aa.policy.PolicyHandler
-	c728 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PolicyHandler.html">
+	c929 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./PolicyHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> PolicyHandler </td></tr>
 		</table></td></tr>
@@ -25,7 +25,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.policy.PolicyArchiveHandler
-	c729 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PolicyArchiveHandler.html">
+	c930 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./PolicyArchiveHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> PolicyArchiveHandler </td></tr>
 		</table></td></tr>
@@ -50,7 +50,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.policy.IPolicyHandler
-	c731 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IPolicyHandler.html">
+	c933 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IPolicyHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> &laquo;interface&raquo; </td></tr>
 			<tr><td> IPolicyHandler </td></tr>
@@ -67,8 +67,8 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	//org.opentox.aa.policy.PolicyHandler implements org.opentox.aa.policy.IPolicyHandler
-	c731:p -> c728:p [dir=back,arrowtail=empty,style=dashed];
+	c933:p -> c929:p [dir=back,arrowtail=empty,style=dashed];
 	//org.opentox.aa.policy.PolicyArchiveHandler extends org.opentox.aa.policy.PolicyHandler
-	c728:p -> c729:p [dir=back,arrowtail=empty];
+	c929:p -> c930:p [dir=back,arrowtail=empty];
 }
 

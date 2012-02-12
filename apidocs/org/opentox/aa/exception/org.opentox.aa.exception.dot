@@ -8,7 +8,7 @@ digraph G {
 	edge [fontname="arial",fontsize=10,labelfontname="arial",labelfontsize=10];
 	node [fontname="arial",fontsize=10,shape=plaintext];
 	// org.opentox.aa.exception.AuthzException
-	c30 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AuthzException.html">
+	c34 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AuthzException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AuthzException </td></tr>
 		</table></td></tr>
@@ -20,7 +20,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.exception.AAUnauthorizedException
-	c31 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAUnauthorizedException.html">
+	c35 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAUnauthorizedException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AAUnauthorizedException </td></tr>
 		</table></td></tr>
@@ -34,7 +34,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.exception.AATokenValidationException
-	c32 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AATokenValidationException.html">
+	c36 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AATokenValidationException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AATokenValidationException </td></tr>
 		</table></td></tr>
@@ -47,7 +47,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.exception.AAServiceNotAvailable
-	c33 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAServiceNotAvailable.html">
+	c37 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAServiceNotAvailable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AAServiceNotAvailable </td></tr>
 		</table></td></tr>
@@ -59,7 +59,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.exception.AAPropertiesException
-	c34 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAPropertiesException.html">
+	c38 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAPropertiesException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AAPropertiesException </td></tr>
 		</table></td></tr>
@@ -71,7 +71,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.exception.AALogoutException
-	c35 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AALogoutException.html">
+	c39 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AALogoutException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AALogoutException </td></tr>
 		</table></td></tr>
@@ -84,7 +84,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	// org.opentox.aa.exception.AAException
-	c36 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAException.html">
+	c40 [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./AAException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 			<tr><td> AAException </td></tr>
 		</table></td></tr>
@@ -96,16 +96,16 @@ digraph G {
 		</table></td></tr>
 		</table>>, fontname="arial", fontcolor="black", fontsize=10.0];
 	//org.opentox.aa.exception.AuthzException extends org.opentox.aa.exception.AAException
-	c36:p -> c30:p [dir=back,arrowtail=empty];
+	c40:p -> c34:p [dir=back,arrowtail=empty];
 	//org.opentox.aa.exception.AAUnauthorizedException extends org.opentox.aa.exception.AAException
-	c36:p -> c31:p [dir=back,arrowtail=empty];
+	c40:p -> c35:p [dir=back,arrowtail=empty];
 	//org.opentox.aa.exception.AATokenValidationException extends org.opentox.aa.exception.AAException
-	c36:p -> c32:p [dir=back,arrowtail=empty];
+	c40:p -> c36:p [dir=back,arrowtail=empty];
 	//org.opentox.aa.exception.AAServiceNotAvailable extends org.opentox.aa.exception.AAException
-	c36:p -> c33:p [dir=back,arrowtail=empty];
+	c40:p -> c37:p [dir=back,arrowtail=empty];
 	//org.opentox.aa.exception.AAPropertiesException extends org.opentox.aa.exception.AAException
-	c36:p -> c34:p [dir=back,arrowtail=empty];
+	c40:p -> c38:p [dir=back,arrowtail=empty];
 	//org.opentox.aa.exception.AALogoutException extends org.opentox.aa.exception.AAException
-	c36:p -> c35:p [dir=back,arrowtail=empty];
+	c40:p -> c39:p [dir=back,arrowtail=empty];
 }
 

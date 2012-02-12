@@ -1,6 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node1_0" href="./PolicyHandler.html" title="&lt;TABLE&gt;" alt="" coords="16,225,453,378"/>
-<area shape="rect" id="node2_1" href="./PolicyArchiveHandler.html" title="&lt;TABLE&gt;" alt="" coords="16,438,453,719"/>
-<area shape="rect" id="node3_2" href="./Policies.html" title="&lt;TABLE&gt;" alt="" coords="499,51,627,125"/>
-<area shape="rect" id="node4_3" href="./IPolicyHandler.html" title="&lt;TABLE&gt;" alt="" coords="16,11,453,165"/>
+<area shape="rect" id="node1_0" href="./PolicyParser.html" title="&lt;TABLE&gt;" alt="" coords="15,11,569,293"/>
+<area shape="rect" id="node2_1" href="./PolicyParser.type.html" title="&lt;TABLE&gt;" alt="" coords="614,83,719,221"/>
+<area shape="rect" id="node3_2" href="./PolicyParser.tags.html" title="&lt;TABLE&gt;" alt="" coords="765,43,891,261"/>
+<area shape="rect" id="node4_3" href="./PolicyHandler.html" title="&lt;TABLE&gt;" alt="" coords="936,353,1373,506"/>
+<area shape="rect" id="node5_4" href="./PolicyArchiveHandler.html" title="&lt;TABLE&gt;" alt="" coords="936,566,1373,847"/>
+<area shape="rect" id="node6_5" href="./Policies.html" title="&lt;TABLE&gt;" alt="" coords="1419,115,1547,189"/>
+<area shape="rect" id="node7_6" href="./Method.html" title="&lt;TABLE&gt;" alt="" coords="1593,83,1698,221"/>
+<area shape="rect" id="node8_7" href="./IPolicyHandler.html" title="&lt;TABLE&gt;" alt="" coords="936,75,1373,229"/>
 </map>

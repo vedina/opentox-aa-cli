@@ -1,7 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node1_0" href="./OTAAParams.html" title="&lt;TABLE&gt;" alt="" coords="15,43,137,261"/>
 <area shape="rect" id="node2_1" href="./OpenToxUser.html" title="&lt;TABLE&gt;" alt="" coords="182,353,407,506"/>
-<area shape="rect" id="node3_2" href="./OpenToxToken.html" title="&lt;TABLE&gt;" alt="" coords="453,11,995,293"/>
-<area shape="rect" id="node4_3" href="./OpenToxPolicy.html" title="&lt;TABLE&gt;" alt="" coords="1041,19,1719,285"/>
+<area shape="rect" id="node3_2" href="./OpenToxToken.html" title="&lt;TABLE&gt;" alt="" coords="453,11,1059,293"/>
+<area shape="rect" id="node4_3" href="./OpenToxPolicy.html" title="&lt;TABLE&gt;" alt="" coords="1105,19,1845,285"/>
 <area shape="rect" id="node5_4" href="./IOpenToxUser.html" title="&lt;TABLE&gt;" alt="" coords="182,83,407,221"/>
 </map>
