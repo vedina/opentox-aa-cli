@@ -3,7 +3,7 @@
  -----
  Background
  -----
- July 2011
+ Feb 2012
 
 OpenTox AA client
 ~~~~~~~  
@@ -18,14 +18,14 @@ OpenTox AA client
     
  Use as {{{http://maven.apache.org}Maven}} dependency:
 
- {{{http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases/ambit/opentox-opensso/1.0.0/}Release}}
+ {{{http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases/ambit/opentox-opensso/1.0.4/}Release}}
 
 ---------------------------------------
 
 	<dependency>
 	  <groupId>ambit</groupId>
 	  <artifactId>opentox-opensso</artifactId>
-	  <version>1.0.0</version>
+	  <version>1.0.4</version>
 	</dependency>
 	
     <repository>
@@ -44,7 +44,7 @@ OpenTox AA client
 	<dependency>
 	  <groupId>ambit</groupId>
 	  <artifactId>opentox-opensso</artifactId>
-	  <version>1.0.1-SNAPSHOT</version>
+	  <version>1.0.4-SNAPSHOT</version>
 	</dependency>
  
     <repository>

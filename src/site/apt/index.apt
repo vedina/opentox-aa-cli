@@ -3,7 +3,7 @@
  -----
  Background
  -----
- July 2011
+ Feb 2012
 
 OpenTox AA client
 ~~~~~~~  
@@ -11,9 +11,9 @@ OpenTox AA client
   
    * Use as  {{{maven.html}Maven dependency}}.
 
-   * Download the {{{https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.0.jar}command line client}}
+   * Download the {{{https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.4.jar}command line client}}
     
-   * Download the release from {{{https://github.com/vedina/opentox-aa-cli/archives/opentox-aa-client-1.0.0}GitHub}}
+   * Download the release from {{{https://github.com/vedina/opentox-aa-cli/archives/opentox-aa-client-1.0.4}GitHub}}
 
    * Download from the {{{http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;quick~opentox-opensso}Maven repository}}
       
@@ -23,6 +23,18 @@ OpenTox AA client
    
 *Releases
 ~~~~~~~ 
+** aacli-1.0.4 ,  Released: Feb 12, 2012
+
+*** Changelog
+
+   * added profiles -P aa-enabled and -P aa-local to switch OpenSSO service
+   
+   * added download method in HTTPClient
+
+   * added an abstract class for policy parsing
+   
+   * helper methods to generate the policy XML without sending
+   
 
 ** aacli-1.0.1 ,  Released: July 21, 2011
  	

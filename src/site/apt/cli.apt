@@ -3,17 +3,17 @@
  -----
  Background
  -----
- July 2011
+ Feb 2012
 
 OpenTox AA client
 ~~~~~~~  
   A java client library and a command line tool for accessing {{{http://opentox.org}OpenTox}} {{{http://opentox.org/dev/apis/api-1.2/AA}authentication and authorization}} services.
   
 
- * Command line client  {{{https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.1.jar}Download}}
+ * Command line client  {{{https://github.com/downloads/vedina/opentox-aa-cli/aacli-1.0.4.jar}Download}}
 	
 ---------------------------------------- 
-	>java -jar aacli-1.0.0.jar
+	>java -jar aacli-1.0.4.jar
 	
 	An OpenTox Authentication and Authorization client.
 	usage: org.opentox.aa.opensso.aacli
