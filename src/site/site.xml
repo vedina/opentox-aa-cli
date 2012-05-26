@@ -17,7 +17,7 @@
       <item name="OpenTox AA" href="http://vedina.github.com/opentox-aa-cli"/>
       <item name="OpenTox Policy service" href="http://vedina.github.com/Pol"/>
       <item name="ToxPredict" href="http://toxpredict.org"/>
-      <item name="ToxBank software" href="http://toxbank.github.com"/>
+      <item name="ToxBank software" href="https://github.com/organizations/ToxBank"/>
     </links>
 
     <menu name="OpenTox AA client">
