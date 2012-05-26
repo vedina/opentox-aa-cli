@@ -56,6 +56,14 @@
 					</execution>
 				</executions>
 			</plugin>
+		<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <locales>en</locales>
+        </configuration>
+      </plugin>
    </plugins>
     <resources>
 	<resource>
@@ -145,16 +153,6 @@
 	        </executions>
 	      </plugin>		
 	      	
-			<!-- 
-			<plugin>
-        		<groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-site-plugin</artifactId>
-        		<version>2.0-beta-6</version>
-        		<configuration>
-          			<locales>en</locales>
-        		</configuration>
-      		</plugin>
-      		 -->
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-release-plugin</artifactId>

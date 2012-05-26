@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="AMBIT2">
   <bannerLeft>
-    <name>Maven</name>
+    <name>OpenTox Authentication and Authorization library</name>
     <src>http://ambit.sourceforge.net/images/ambit-logo.png</src>
     <href>index.html</href>
   </bannerLeft>
-  <bannerRight>
-    <src>http://ambit.sourceforge.net/images/ambit-version.png</src>
+    <bannerRight>
+    <src></src>
   </bannerRight>
-
   <body>
     <links>
       <item name="Toxtree" href="http://toxtree.sourceforge.net"/>
@@ -18,6 +17,7 @@
       <item name="OpenTox AA" href="http://vedina.github.com/opentox-aa-cli"/>
       <item name="OpenTox Policy service" href="http://vedina.github.com/Pol"/>
       <item name="ToxPredict" href="http://toxpredict.org"/>
+      <item name="ToxBank software" href="http://toxbank.github.com"/>
     </links>
 
     <menu name="OpenTox AA client">
@@ -34,7 +34,45 @@
 
   </poweredBy>
     
-  <publishDate position="navigation-bottom" format="MM-dd-yy"/>
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.2.1</version>
+    </skin>  
+      <publishDate position="navigation-bottom" format="MM-dd-yy"/>
+      
+     <custom>
+    <fluidoSkin>
+      <searchEnabled>true</searchEnabled>
+      <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+      <topBarEnabled>false</topBarEnabled>
+      <topBarIcon>
+      <name>OpenTox AuthN and AuthZ client library</name>
+      <alt>OpenTox Authentication and Authorization library</alt>
+      <src>http://ambit.sourceforge.net/images/ambit-logo.png</src>
+      <href>/index.html</href>
+      </topBarIcon>
+
+	  <googleSearch>
+        <sitesearch>http://github.com/vedina/opentox-aa-cli</sitesearch>
+      </googleSearch>
+
+      <sideBarEnabled>true</sideBarEnabled>
+      <!-- 
+      <facebookLike />
+      <googlePlusOne />
+       -->
+       <gitHub>
+        <projectId>vedina/opentox-aa-cli</projectId>
+        <ribbonOrientation>right</ribbonOrientation>
+        <ribbonColor>green</ribbonColor>
+      </gitHub>
+       
+    </fluidoSkin>
+ 
+  </custom>    
+
 
 
 </project>
