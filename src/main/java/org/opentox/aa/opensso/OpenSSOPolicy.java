@@ -104,6 +104,7 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 	public int createGroupPolicy(String group,OpenSSOToken token, String uri, String[] methods) throws Exception {
 
 		StringBuffer b = new StringBuffer();
+		b.append(UUID.randomUUID().toString());
 		b.append(uri.replace(":","").replace("/",""));
 		for (String method: methods) b.append(method);
 		return createGroupPolicy(group,token, uri, methods,b.toString());
@@ -131,6 +132,7 @@ public class OpenSSOPolicy extends OpenToxPolicy<OpenSSOToken,String> {
 	public int createUserPolicy(String user,OpenSSOToken token, String uri, String[] methods) throws Exception {
 
 		StringBuffer b = new StringBuffer();
+		b.append(UUID.randomUUID().toString());
 		b.append(uri.replace(":","").replace("/",""));
 		for (String method: methods) b.append(method);
 		return createUserPolicy(user,token, uri, methods,b.toString());
