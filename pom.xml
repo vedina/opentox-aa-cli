@@ -3,7 +3,7 @@
   <groupId>ambit</groupId>
   <artifactId>opentox-opensso</artifactId>
   <name>OpenTox AA</name>
-  <version>opentox-opensso-1.0.5</version>
+  <version>1.0.6-SNAPSHOT</version>
   <description>OpenTox Authorization and Authentication client library in Java.
 
 </description>
