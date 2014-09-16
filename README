@@ -9,14 +9,17 @@ Build:
 Use:
 1) As maven dependency
 
+```
 <dependency>
   <groupId>ambit</groupId>
   <artifactId>opentox-opensso</artifactId>
   <version>1.0.6</version>
 </dependency>
+```
 
 Repositories:
 
+````
     <repository>
         <id>ambit-plovdiv-releases</id>
         <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
@@ -24,7 +27,9 @@ Repositories:
   	<enabled>false</enabled>
          </snapshots>
     </repository>
+````
 
+````
     <repository>
         <id>ambit-plovdiv-snapshots</id>
         <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
@@ -32,9 +37,11 @@ Repositories:
                <enabled>true</enabled>
         </snapshots>
     </repository>
+````
 
 2) As a command line utility
 
+````
 java -jar opentox-opensso-{version}-jar-with-dependencies.jar
 
 	An OpenTox Authentication and Authorization client.
@@ -51,13 +58,14 @@ java -jar opentox-opensso-{version}-jar-with-dependencies.jar
 	                              present, user and password are ignored.
 	 -u,--user <username>         OpenTox user name
 	 -z,--authz <URI>             URI of OpenTox policy service 
+````
 
 
 3) Set Maven profile
 
 This is a maven project. The following maven profile must be configured for build to succeed.
 
-
+````
 <!-- Start config -->
   <profiles>
    <profile>
@@ -77,3 +85,4 @@ This is a maven project. The following maven profile must be configured for buil
     </profile>
   </profiles>
 <!-- End config -->
+````
