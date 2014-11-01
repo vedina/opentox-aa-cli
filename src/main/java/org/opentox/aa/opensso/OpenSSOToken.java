@@ -28,11 +28,13 @@ import org.opentox.rest.RestException;
  */
 public class OpenSSOToken extends OpenToxToken {
 	//services
-	protected static final String authn = "%s/authenticate?uri=service=openldap";
+	protected static final String authn_suffix = "%s/authenticate%s";
 	protected static final String authz = "%s/authorize";
 	protected static final String attributes = "%s/attributes";
 	protected static final String token_validation = "%s/isTokenValid";
-	protected static final String logout = "%s/logout"; 
+	protected static final String logout = "%s/logout";
+	protected String suffix = null;
+	
 	//parsing helpers
 	private static final String tokenReceived = "token.id=";
 	private static final String boolean_true_result = "boolean=true";
@@ -41,7 +43,12 @@ public class OpenSSOToken extends OpenToxToken {
 	public static final String authz_result_bad = "boolean=false";
 	
 	public OpenSSOToken(String authService) {
+		this(authService,"?uri=service=openldap");
+	}
+	
+	public OpenSSOToken(String authService,String suffix) {
 		super(authService);
+		this.suffix = suffix;
 	}
 
 	@Override
@@ -53,7 +60,7 @@ public class OpenSSOToken extends OpenToxToken {
 	public boolean login(String username, String password) throws Exception {
 		if (username==null) throw new Exception(MSG_EMPTY_USERNAME,null);
 		
-		String uri = String.format(authn, authService);
+		String uri = String.format(authn_suffix, authService,suffix);
 		HTTPClient client = new HTTPClient(uri);
 
 		try {

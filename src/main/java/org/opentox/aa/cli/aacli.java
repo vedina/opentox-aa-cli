@@ -47,6 +47,7 @@ public class aacli {
 	private final static Logger LOGGER = Logger.getLogger(aacli.class .getName());
 	protected int max = -1;
 	
+	protected String suffix = "";// "?uri=service=openldap";
 	enum policy_command {
 		authorize,
 		list,
@@ -69,7 +70,7 @@ public class aacli {
 		System.out.println(String.format("Using %s: %s",_option.authn.getDescription(),authService));
 		System.out.println(String.format("Using %s: %s",_option.authz.getDescription(),policyService));
 		
-		if (ssotoken==null) ssotoken = new OpenSSOToken(authService);
+		if (ssotoken==null) ssotoken = new OpenSSOToken(authService,suffix);
 		if (ssotoken.getToken()==null) {
 			ssotoken.login(user);
 			if (ssotoken.getToken()==null) {
@@ -374,7 +375,7 @@ public class aacli {
 		}
 		case subjectid: {
 			if ((argument==null) || "".equals(argument.trim())) throw new IllegalArgumentException("Empty token!");
-			this.ssotoken = new OpenSSOToken(authService);
+			this.ssotoken = new OpenSSOToken(authService,suffix);
 			this.ssotoken.setToken(argument);
 			break;
 		}
