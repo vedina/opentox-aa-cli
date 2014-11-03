@@ -1,13 +1,14 @@
+## OpenTox authorization and authentication REST client
+
 A library and a command line client to facilitate access to the OpenTox authorization and authentication services.
 
 http://opentox.org/dev/apis/api-1.2/AA
 
-Build:
+###Usage:
 
->mvn clean package
+####1) As a [Maven dependency](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~ambit~opentox-opensso~~~)
 
-Use:
-1) As maven dependency
+Release 
 
 ```
 <dependency>
@@ -17,8 +18,19 @@ Use:
 </dependency>
 ```
 
+Development
+
+```
+<dependency>
+  <groupId>ambit</groupId>
+  <artifactId>opentox-opensso</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+</dependency>
+```
+
 Repositories:
 
+Releases:
 ````
     <repository>
         <id>ambit-plovdiv-releases</id>
@@ -29,6 +41,7 @@ Repositories:
     </repository>
 ````
 
+Snapshots:
 ````
     <repository>
         <id>ambit-plovdiv-snapshots</id>
@@ -39,7 +52,7 @@ Repositories:
     </repository>
 ````
 
-2) As a command line utility
+###2) As a command line utility
 
 ````
 java -jar opentox-opensso-{version}-jar-with-dependencies.jar
@@ -60,18 +73,22 @@ java -jar opentox-opensso-{version}-jar-with-dependencies.jar
 	 -z,--authz <URI>             URI of OpenTox policy service 
 ````
 
+###Build:
 
-3) Set Maven profile
+>mvn clean package
+
+####Set Maven profile
 
 This is a maven project. The following maven profile must be configured for build to succeed.
 
+#####opentox-opensso
 ````
 <!-- Start config -->
   <profiles>
    <profile>
       <id>opentox-opensso</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
          <!-- Configuration of OpenTox authentication service -->
@@ -85,4 +102,21 @@ This is a maven project. The following maven profile must be configured for buil
     </profile>
   </profiles>
 <!-- End config -->
+````
+
+#####aa-openam
+
+````
+  <profile>
+      <id>aa-openam</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <aa.opensso>https://openam.in-silico.ch/auth</aa.opensso>
+        <aa.policy>https://openam.in-silico.ch/pol</aa.policy>
+        <aa.user>YOUR-USER-FOR-TESTING</aa.user>
+        <aa.pass>YOUR-PASS-FOR-TESTING</aa.pass>
+      </properties>
+    </profile>
 ````
