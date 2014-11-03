@@ -6,7 +6,33 @@ http://opentox.org/dev/apis/api-1.2/AA
 
 ###Usage:
 
-####1) As a [Maven dependency](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~ambit~opentox-opensso~~~)
+
+###1) As a command line utility
+
+#### Download [aacli-2.0.0-SNAPSHOT.jar](http://sourceforge.net/projects/ambit/files/opentox-aa-cli/aacli-2.0.0-SNAPSHOT.jar/download)
+
+
+
+````
+java -jar opentox-opensso-{version}-jar-with-dependencies.jar
+
+	An OpenTox Authentication and Authorization client.
+	usage: 
+	 -c,--command <the command>   The command to be performed. One of
+	                              authorize|list|delete|create|archive Default value:  authorize
+	 -h,--help                    OpenTox Authentication and Authorization
+	                              client
+	 -i,--policyid <policyid>     An OpenSSO/OpenAM policy identifier
+	 -n,--authn <URI>             URI of OpenSSO/OpenAM service 
+	 -p,--password <password>     OpenTox user password
+	 -r,--uri <URI>               URI of an OpenTox resource
+	 -s,--subjectid <token>       OpenSSO/OpenAM token. If the token is
+	                              present, user and password are ignored.
+	 -u,--user <username>         OpenTox user name
+	 -z,--authz <URI>             URI of OpenTox policy service 
+````
+
+####2) As a [Maven dependency](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~ambit~opentox-opensso~~~)
 
 Release 
 
@@ -50,27 +76,6 @@ Snapshots:
                <enabled>true</enabled>
         </snapshots>
     </repository>
-````
-
-###2) As a command line utility
-
-````
-java -jar opentox-opensso-{version}-jar-with-dependencies.jar
-
-	An OpenTox Authentication and Authorization client.
-	usage: 
-	 -c,--command <the command>   The command to be performed. One of
-	                              authorize|list|delete|create|archive Default value:  authorize
-	 -h,--help                    OpenTox Authentication and Authorization
-	                              client
-	 -i,--policyid <policyid>     An OpenSSO/OpenAM policy identifier
-	 -n,--authn <URI>             URI of OpenSSO/OpenAM service 
-	 -p,--password <password>     OpenTox user password
-	 -r,--uri <URI>               URI of an OpenTox resource
-	 -s,--subjectid <token>       OpenSSO/OpenAM token. If the token is
-	                              present, user and password are ignored.
-	 -u,--user <username>         OpenTox user name
-	 -z,--authz <URI>             URI of OpenTox policy service 
 ````
 
 ###Build:
