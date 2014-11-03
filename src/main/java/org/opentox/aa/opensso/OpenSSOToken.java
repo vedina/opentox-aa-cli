@@ -41,9 +41,13 @@ public class OpenSSOToken extends OpenToxToken {
 	
 	public static final String authz_result_ok = "boolean=true";
 	public static final String authz_result_bad = "boolean=false";
-	
+	/**
+	 * Versions up to 2.0.0 add "?uri=service=openldap"
+	 * This is optional for OpenSSO, but breaks OpenAM
+	 * @param authService
+	 */
 	public OpenSSOToken(String authService) {
-		this(authService,"?uri=service=openldap");
+		this(authService,"");
 	}
 	
 	public OpenSSOToken(String authService,String suffix) {
