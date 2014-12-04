@@ -40,7 +40,7 @@ Release
 <dependency>
   <groupId>ambit</groupId>
   <artifactId>opentox-opensso</artifactId>
-  <version>1.0.6</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 
@@ -50,7 +50,7 @@ Development
 <dependency>
   <groupId>ambit</groupId>
   <artifactId>opentox-opensso</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.1-SNAPSHOT</version>
 </dependency>
 ```
 
