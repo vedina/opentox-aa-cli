@@ -791,7 +791,7 @@ public class aacli {
 
 	    @Override
 	    public String getDescription() {
-		return "Skip confirm mquestion on delete";
+		return "Skip confirm question on delete";
 	    }
 
 	    @Override
