@@ -165,28 +165,17 @@
       </plugins>
     </pluginManagement>
   </build>
-  <distributionManagement>
-    <!-- 
-    <repository>
-      <id>dev_web_sourceforge</id>
-      <url>scp://web.sourceforge.net/home/groups/a/am/ambit/htdocs/jars</url>
-    </repository>  
- -->
-    <snapshotRepository>
-      <id>ambit-plovdiv-snapshots</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ambit-plovdiv-releases</id>
-      <url>http://ambit.uni-plovdiv.bg:8083/nexus/content/repositories/releases</url>
-    </repository>
-    <!-- 
-    <site>
-      <id>website_ambit</id>
-      <url>scp://shell.sourceforge.net/home/groups/a/am/ambit/htdocs/AMBIT2-LIBS</url>
-    </site>
- 	 -->
-  </distributionManagement>
+	<distributionManagement>
+
+		<snapshotRepository>
+			<id>nexus-idea-snapshots</id>
+			<url>https://nexus.ideaconsult.net/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus-idea-releases</id>
+			<url>https://nexus.ideaconsult.net//content/repositories/releases</url>
+		</repository>
+	</distributionManagement>
   <mailingLists>
     <mailingList>
       <name>Developers list</name>
