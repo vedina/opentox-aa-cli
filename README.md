@@ -4,10 +4,10 @@ A library and a command line client to facilitate access to the OpenTox authoriz
 
 http://opentox.org/dev/apis/api-1.2/AA
 
-###Usage:
+### Usage:
 
 
-###1) As a command line utility
+### 1) As a command line utility
 
 #### Download [aacli-2.0.0-SNAPSHOT.jar](http://sourceforge.net/projects/ambit/files/opentox-aa-cli/aacli-2.0.0-SNAPSHOT.jar/download)
 
@@ -32,7 +32,7 @@ java -jar opentox-opensso-{version}-jar-with-dependencies.jar
 	 -z,--authz <URI>             URI of OpenTox policy service 
 ````
 
-####2) As a [Maven dependency](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~ambit~opentox-opensso~~~)
+#### 2) As a [Maven dependency](http://ambit.uni-plovdiv.bg:8083/nexus/index.html#nexus-search;gav~ambit~opentox-opensso~~~)
 
 Release 
 
@@ -82,11 +82,11 @@ Snapshots:
 
 >mvn clean package
 
-####Set Maven profile
+#### Set Maven profile
 
 This is a maven project. The following maven profile must be configured for build to succeed.
 
-#####opentox-opensso
+##### opentox-opensso
 ````
 <!-- Start config -->
   <profiles>
@@ -109,7 +109,7 @@ This is a maven project. The following maven profile must be configured for buil
 <!-- End config -->
 ````
 
-#####aa-openam
+##### aa-openam
 
 ````
   <profile>
